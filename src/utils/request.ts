@@ -4,7 +4,7 @@ import {AxiosResponse} from 'axios/index';
 
 
 const instance = axios.create({
-    baseURL: 'http://localhost:7001',
+    baseURL: 'http://localhost:7002',
     timeout: 1000,
     // headers: {'X-Custom-Header': 'foobar'}
 });
