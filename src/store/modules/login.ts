@@ -24,6 +24,7 @@ class Login{
             }
            //2.判断是否七天免登陆
             if(form.autoLogin){
+                console.log(result.token)
                setToken(result.token);
             }
         }

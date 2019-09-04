@@ -1,11 +1,12 @@
 import * as React from 'react'
-
+import RouterView from "../../../router/routerview"
+import "../../../assets/question/index.css"
 export class Question extends React.Component {
     public  render() {
         return (
-            <div>
-                question
-                {this.props.children}
+            <div className="question">
+                
+                <RouterView routes={this.props['routes']}/>
             </div>
         )
     }

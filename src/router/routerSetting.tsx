@@ -96,8 +96,8 @@ let routes = [
                 path: "/main/user"
 
             }, {
-                path: "/main",
-                redirect: "/main/question"
+                from: "/main",
+                to: "/main/question"
             }
         ],
         component: main,

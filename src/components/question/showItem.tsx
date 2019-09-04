@@ -1,13 +1,12 @@
 import * as React from "react";
-import { Layout } from 'antd';
+
 import {inject, observer} from 'mobx-react'
- 
-const {   Content } = Layout;
+
 
 @inject()
 @observer
 
-export class ContentForm extends React.Component {
+export class Head extends React.Component {
     
     constructor(props:any){
        super(props)
@@ -15,12 +14,10 @@ export class ContentForm extends React.Component {
 
     public  render() {
         return (
-          <Content>
-            {this.props.children}
-          </Content>
+          <div className="show-item"></div>
         )
     }
 }
 
-export default ContentForm
+export default Head
  
