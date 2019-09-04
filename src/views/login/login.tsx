@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import {WrappedFormUtils} from 'antd/lib/form/Form'
 import {inject, observer} from 'mobx-react'
 import "../../assets/login/index.css"
@@ -20,11 +20,11 @@ export class Login extends React.Component<PropsInfo> {
         this.props.form.validateFields(async(err:Error, values:any) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            const result = await this.props.login.login(values);
-            if(result===1){
+            const {code,msg} = await this.props.login.login(values);
+            if(code===1){
               this.props.history.replace("/main")
             }else{
-              alert("登陆失败")
+              message.error(msg||'用户名或密码错误')
             }
           }
         });
@@ -32,12 +32,22 @@ export class Login extends React.Component<PropsInfo> {
     
    public  render() {
         const { getFieldDecorator } = this.props.form;
+        const {user_name,user_pwd} =this.props.login.account;
         return (
         <div className='login-wrapper'>          
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item>
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+              {getFieldDecorator('user_name', {
+                   validateTrigger: 'onBlur',
+                   initialValue: user_name,
+                rules: [{ validator: (ruler, value, callback)=>{
+                  console.log('value...', value);
+                  if (/[a-z]{5,20}/.test(value)){
+                    callback();
+                  }else{
+                    callback('Please input valid username!')
+                  }
+                }}],
               })(
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -46,8 +56,17 @@ export class Login extends React.Component<PropsInfo> {
               )}
             </Form.Item>
             <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+              {getFieldDecorator('user_pwd', {
+                   validateTrigger: 'onBlur',
+                   initialValue: user_pwd,
+                rules: [{ validator: (ruler, value, callback)=>{
+                  console.log('value...', value);
+                  if (/^(?![a-z]+$)(?![A-Z]+$)(?!([^(a-zA-Z\!\*\.\#)])+$)^.{8,16}$/.test(value)){
+                    callback();
+                  }else{
+                    callback('Please input valid password!')
+                  }
+                }}],
               })(
                 <Input
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -61,7 +80,14 @@ export class Login extends React.Component<PropsInfo> {
                 valuePropName: 'checked',
                 initialValue: true,
               })(<Checkbox>Remember me</Checkbox>)}
-              <a className="login-form-forgot" href="">
+             
+            </Form.Item>
+            <Form.Item>
+            {getFieldDecorator('autoLogin', {
+                valuePropName: 'checked',
+                initialValue: true,
+              })(<Checkbox>Auto login in theven days</Checkbox>)}
+            <a className="login-form-forgot" href="">
                 Forgot password
               </a>
               <Button type="primary" htmlType="submit" className="login-form-button">

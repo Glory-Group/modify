@@ -1,4 +1,4 @@
-import React from 'react'
+import * as  React from 'react'
 import Loadable from "react-loadable"
 function Loading() {
     return (
@@ -102,9 +102,9 @@ let routes = [
         ],
         component: main,
         path: "/main"
-    }, {
-        path: "/",
-        redirect: "/main"
+    },  {
+        from: "/",
+        to: "/login"
     }
 ]
 export default routes
