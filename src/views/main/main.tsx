@@ -23,8 +23,8 @@ const { SubMenu } = Menu;
         <Layout>
           <Slider></Slider>
           <ContentForm>
-            <RouterView routes={this.props['routes']} />
-
+            {/* <RouterView routes={this.props['routes']} /> */}
+          {this.props.children}
           </ContentForm>
 
         </Layout>

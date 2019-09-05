@@ -13,6 +13,11 @@ class Question{
         }
         
     }
+    //获取课程
+     @action async getSubject(params:any):Promise<any>{
+         let result:any =await this.getSubject(params);
+
+     }
 }
 
 export default Question;

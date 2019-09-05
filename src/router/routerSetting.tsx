@@ -74,7 +74,7 @@ let routes = [
 
             },
             {
-                cildren:[{
+                children:[{
                     component:addText,
                     path:"/main/text/addText"
                 },{

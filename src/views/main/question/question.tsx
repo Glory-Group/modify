@@ -6,7 +6,8 @@ export class Question extends React.Component {
         return (
             <div className="question">
                 
-                <RouterView routes={this.props['routes']}/>
+                {/* <RouterView routes={this.props['routes']}/> */}
+                {this.props.children}
             </div>
         )
     }
