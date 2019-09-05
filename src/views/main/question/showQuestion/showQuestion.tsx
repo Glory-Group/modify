@@ -124,7 +124,7 @@ export class ShowQuestion extends React.Component<Props> {
                             })
                         }
                     </div>
-                </div>s
+                </div>
             </div>
         )
     }

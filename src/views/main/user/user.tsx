@@ -4,6 +4,7 @@ export class User extends React.Component {
     public  render() {
         return (
             <div>
+             
                 {this.props.children}
             </div>
         )

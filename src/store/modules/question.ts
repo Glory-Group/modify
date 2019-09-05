@@ -3,6 +3,8 @@ import {getQuestion,getSubject,examType,getQuestionType,getCondition} from '../.
 
 class Question{
     @observable dataList:object={};
+   
+   @observable questionTypeList: Array<object> = []
     // 按条件获取试题
     @action async getQuestion(params: any): Promise<any>{
       
@@ -49,5 +51,8 @@ class Question{
     }
 
 }
+
+
+
 
 export default Question;
