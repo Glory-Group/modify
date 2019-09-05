@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import {WrappedFormUtils} from 'antd/lib/form/Form'
 import {inject, observer} from 'mobx-react'
-import "../../assets/login/index.css"
+import "./scss/index.css"
 
 interface PropsInfo{
     history:any,
