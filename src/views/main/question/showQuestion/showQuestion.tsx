@@ -4,7 +4,8 @@ import { Select, Button } from "antd"
 import ShowItem from "../../../../components/question/showItem"
 const { Option } = Select;
 interface Props {
-    question: any
+    question: any,
+    history:any
 }
 
 @inject('question')
@@ -25,6 +26,7 @@ export class ShowQuestion extends React.Component<Props> {
         const datas = await this.props.question.getSubject();
         const examType = await this.props.question.getType();
         const questionType = await this.props.question.questionType();
+        console.log(result)
       //  this.state.subject=[...this.refs.subject.children]
         this.setState({ dataList: result, subjectList: datas, examType,questionType,subject:this.refs.subject })
     }
@@ -39,6 +41,7 @@ export class ShowQuestion extends React.Component<Props> {
 
     public render() {
         let { dataList, subjectList, examType , questionType ,count} = this.state
+        let {history}=this.props
         return (
             <div className="wrap" >
                 <h2 style={{ padding: "20px 0px", marginTop: "10px" }}>查看试题</h2>
@@ -100,9 +103,11 @@ export class ShowQuestion extends React.Component<Props> {
                     <div className="bottom-content">
                         {
                             dataList && dataList.map((item: any, index) => {
-                                return <div className="show-item" key={index} >
-                                    <div className="left">
-                                        <a href="#">
+                                return <div className="show-item" key={index}  >
+                                    <div className="left" onClick={()=>{
+                                        //history.push({path:"/main/question/detail/"+item.questions_id,params:item})
+                                    }} >
+                                       <a href={"/main/question/detail/"+item.questions_id}>
                                             <div style={{ margin: "0 0 4px" }} > <span style={{ color: "rgba(0,0,0,0.65)" }} >{item.title}</span> </div>
                                             <div style={{ margin: "10px 0" }}>
                                                 <span style={{ color: "#1890ff", background: "#e6f7ff", border: "1px solid #91d5ff", margin: "0 8px 0 0", padding: "0 7px" }} >{item.questions_type_text}</span>
@@ -110,7 +115,7 @@ export class ShowQuestion extends React.Component<Props> {
                                                 <span style={{ color: "#fa8c16", background: " #fff7e6", border: "1px solid #ffd591", margin: "0 8px 0 0", padding: "0 7px" }} >{item.exam_name}</span>
                                             </div>
                                             <div style={{ color: "#0139fd" }}>{item.user_name}发布</div>
-                                        </a>
+                                        </a> 
                                     </div>
                                     <div className="right">
                                         <a style={{ color: "#0139fd" }}>编辑</a>

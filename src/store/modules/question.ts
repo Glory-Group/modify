@@ -1,5 +1,5 @@
 import {observable, action} from 'mobx'
-import {getQuestion,getSubject,examType,getQuestionType} from '../../service/index'
+import {getQuestion,getSubject,examType,getQuestionType,getCondition} from '../../service/index'
 
 class Question{
     @observable dataList:object={};
@@ -34,6 +34,14 @@ class Question{
     //获取试题类型
     @action async questionType(params:any):Promise<any>{
         let result:any = await getQuestionType(params);
+        const {code,data,msg}=result;
+        if(code===1){
+            return data
+        }
+    }
+    //按条件获取试题
+    @action async condition(params:any):Promise<any>{
+        let result:any = await getCondition(params);
         const {code,data,msg}=result;
         if(code===1){
             return data

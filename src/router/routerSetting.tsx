@@ -24,6 +24,7 @@ let addText = Loadable({ loading: Loading, loader: () => import("../views/main/t
 let listText = Loadable({ loading: Loading, loader: () => import("../views/main/text/listText/listText") })
 let addUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/addUser/addUser") })
 let showUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/showUser/showUser") })
+let showDetail=Loadable({loading:Loading,loader:()=>import("../views/main/question/showQuestion/detail/index")})
 let routes = [
     {
         component: login,
@@ -60,6 +61,10 @@ let routes = [
                     {
                         component: addQuestion,
                         path: "/main/question/addQuestion"
+                    },
+                    ,{
+                        component:showDetail,
+                        path:"/main/question/detail/:id"
                     },
                     {
                         component: showQuestion,

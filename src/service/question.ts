@@ -19,3 +19,8 @@ export let examType = (params:object)=>{
 export let getQuestionType = (params:object)=>{
     return request.get("/exam/getQuestionsType",{params})
 }
+
+//按条件获取试题
+export let getCondition =(params:object)=>{
+    return request.get("/exam/questions/condition",{params})
+}
