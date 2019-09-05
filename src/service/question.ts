@@ -1,7 +1,6 @@
-import request from "../utils/request"
+import request from '../util/request';
 
-//获取试题
-
-export let getQuestion=(params:object)=>{
-    return request.get('/exam/questions/condition',{params})
+// 获取试题
+export let getQuestion = (params: object)=>{
+    return request.get('/exam/questions/condition', {params});
 }
