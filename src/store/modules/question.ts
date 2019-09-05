@@ -1,5 +1,5 @@
 import {observable, action} from 'mobx'
-import {getQuestion,getSubject,examType,getQuestionType,getCondition} from '../../service/index'
+import {getQuestion,getSubject,examType,getQuestionType,getCondition,addType} from '../../service/index'
 
 class Question{
     @observable dataList:object={};
@@ -11,7 +11,7 @@ class Question{
         let result: any = await getQuestion(params);
         const {code,data,msg}=result
         if(code===1){
-           return data
+           return result
         }
         
     }
@@ -20,7 +20,7 @@ class Question{
          let result:any = await getSubject(params);
          const {code,data,msg}=result;
          if(code===1){
-             return data
+             return result
          }
      }
 
@@ -29,7 +29,7 @@ class Question{
         let result:any = await examType(params);
         const {code,data,msg}=result;
         if(code===1){
-            return data
+            return result
         }
     }
 
@@ -38,7 +38,7 @@ class Question{
         let result:any = await getQuestionType(params);
         const {code,data,msg}=result;
         if(code===1){
-            return data
+            return result
         }
     }
     //按条件获取试题
@@ -46,9 +46,15 @@ class Question{
         let result:any = await getCondition(params);
         const {code,data,msg}=result;
         if(code===1){
-            return data
+            return result
         }
     }
+
+       //添加试题类型
+   @action async addTypeAction(params: any) {
+    let result = await addType(params)
+    return result
+ }
 
 }
 

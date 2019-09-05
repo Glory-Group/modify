@@ -17,11 +17,11 @@ export class ShowDetail extends React.Component<PropsInfo> {
         let { match } = this.props
         let id = match.params.id
         const result = await this.props.question.getQuestion();
-        const data = result.filter((item: any) => item.questions_id === id)
+        const data = result.data.filter((item: any) => item.questions_id === id)
         let { questions_type_id, subject_id, exam_id, questions_id } = data[0]
         const dataList = await this.props.question.condition({ questions_id, questions_type_id, subject_id, exam_id })
         console.log(dataList)
-        this.setState({ dataList })
+        this.setState({ dataList:dataList.data })
 
     }
     constructor(props: any) {

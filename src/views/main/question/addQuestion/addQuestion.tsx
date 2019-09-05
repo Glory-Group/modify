@@ -30,7 +30,7 @@ export class AddQuestion extends React.Component<propsInfo> {
         
     }
     getExamType = async () => {
-        let result = await this.props.question.getExamTypeAction()
+        let result = await this.props.question.getType()
         if (result.code === 1) {
             let examTypeList: any = []
             result.data.map((item: any, index: number) => {
@@ -48,7 +48,7 @@ export class AddQuestion extends React.Component<propsInfo> {
         })
     }
     getSubject = async () => {
-        let result = await this.props.question.getSubjectAction()
+        let result = await this.props.question.getSubject()
         if (result.code === 1) {
             let subjectList: any = []
             result.data.map((item: any, index: number) => {
@@ -67,7 +67,7 @@ export class AddQuestion extends React.Component<propsInfo> {
         })
     }
     getQuestionsType = async () => {
-        let result = await this.props.question.getQuestionsTypes()
+        let result = await this.props.question.questionType()
         if (result.code === 1) {
             let questionsTypeList: any = []
             result.data.map((item: any, index: number) => {

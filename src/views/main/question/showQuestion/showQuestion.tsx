@@ -28,7 +28,7 @@ export class ShowQuestion extends React.Component<Props> {
         const questionType = await this.props.question.questionType();
         console.log(result)
       //  this.state.subject=[...this.refs.subject.children]
-        this.setState({ dataList: result, subjectList: datas, examType,questionType,subject:this.refs.subject })
+        this.setState({ dataList: result.data, subjectList: datas.data, examType:examType.data,questionType:questionType.data,subject:this.refs.subject })
     }
     constructor(props: any) {
         super(props)

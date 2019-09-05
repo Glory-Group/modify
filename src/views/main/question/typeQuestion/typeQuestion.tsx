@@ -43,7 +43,7 @@ export class TypeQuestion extends React.Component<propsInfo> {
         this.getList()
     }
     getList = async () => {
-        let result = await this.props.question.getQuestionsTypes()
+        let result = await this.props.question.questionType()
         if(result.code===1){
             result.data.map((item: any, index: number) => item.key = index)
             this.setState({

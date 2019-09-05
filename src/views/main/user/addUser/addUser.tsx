@@ -36,7 +36,6 @@ export class AddUser extends React.Component<PropsInfo> {
     public render() {
         const { size, identify,isShow } = this.state
         return (
-<<<<<<< HEAD
             <div className="addUser" >
                 <h2 style={{ padding: "20px 0px", marginTop: "10px" }}>添加用户</h2>
                 <div className="box" >
@@ -168,10 +167,6 @@ export class AddUser extends React.Component<PropsInfo> {
                         </div>
                     </div>
                 </div>
-=======
-            <div>
-               添加用户
->>>>>>> 20df4549d76bda45a8f9ef9b34939ac1ac94aa17
             </div>
         )
     }
