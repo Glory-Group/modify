@@ -1,6 +1,6 @@
-import 'antd/dist/antd.css';
 import * as React from 'react';
-import Router from "./router"
+import 'antd/dist/antd.css';
+import RoutesView from "./router/router"
 import {Provider} from 'mobx-react';
 import store from './store'
 class App extends React.Component {
@@ -8,10 +8,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <Provider {...store}>
-              <Router/>
-       
+          <RoutesView/>
         </Provider>
-     
+       
       </div>
     );
   }

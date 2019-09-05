@@ -1,6 +1,5 @@
-import request from '../utils/request';
+import request from "../util/request"
 
-// 登陆
-export let loginInfo = (params: object)=>{
-    return request.post('/user/login', params);
+export let getUserList=()=>{
+    return request.get("/user/user")
 }

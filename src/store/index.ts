@@ -1,9 +1,13 @@
+// 引入子模块
+import Login from './modules/login';
+import Question from "./modules/question";
 import User from "./modules/user"
-import Question from "./modules/question"
-
+// 实例化模块
+const login = new Login();
+const question=new Question();
 const user=new User()
-const question=new Question()
 export default {
-    user,
-    question
+    login,
+    question,
+    user
 }
