@@ -100,10 +100,9 @@ class Siders extends React.Component {
     console.log(collapsed);
     this.setState({ collapsed });
   };
-
   render() {
     let { navList } = this.state
-    return <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+    return <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{height:"100%",position:"fixed",top:"64px"}}>
       <div className="logo">
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
           {navList.map((item: any, index: number) =>

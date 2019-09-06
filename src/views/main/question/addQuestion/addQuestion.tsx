@@ -109,14 +109,14 @@ export class AddQuestion extends React.Component<propsInfo> {
     handleSubmit = (e: any) => {
         e.preventDefault();
         let { exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem } = this.state
-        this.props.form.validateFields(async(err: Error, values: any) => {
+        this.props.form.validateFields(async (err: Error, values: any) => {
             if (!err) {
                 //console.log(questions_answer, values, exam_id, "1", subject_id, "2", questions_type_id, "3", user_id);
                 let params = {
-                    exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem,title:values.title
+                    exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem, title: values.title
                 }
-                let result=await this.props.question.addQuestionsAction(params)
-                if(result.code===1){
+                let result = await this.props.question.addQuestionsAction(params)
+                if (result.code === 1) {
                     message.info(result.msg)
                 }
             }
@@ -127,42 +127,63 @@ export class AddQuestion extends React.Component<propsInfo> {
         const { examTypeOptions, subjectListOptions, questionsTypeOptions, questions_answer, questions_stem } = this.state
         return (
             <div className="add-question-content">
-                添加试题
-                <Form onSubmit={this.handleSubmit} className="login-form">
+                <div className="title">
+                    添加试题
+                </div>
+
+                <Form onSubmit={this.handleSubmit} className="login-form content-box">
                     <Form.Item className="login-form-stem">
-                        题目标题
+                        <span>
+                            题目标题
+                        </span>
+
                         {getFieldDecorator('title', {
                             validateTrigger: "onBlur",
                             rules: [{ required: true, message: 'Please input questions title!' }]
                         })(
                             <Input
                                 placeholder="请输入题目标题，不超过20个字"
-                                style={{width:"500px",display:"block",marginTop:"10px"}}
+                                style={{ width: "500px", display: "block", marginTop: "10px" }}
                             />,
                         )}
                     </Form.Item>
                     <Form.Item>
-                        题目主题
+                        <span>
+                            题目主题
+                        </span>
 
-                        <Editor value={questions_stem} onChange={this.changeStem}>
+
+                        <Editor value={questions_stem} onChange={this.changeStem} style={{height:"335px"}}>
 
                         </Editor>
                     </Form.Item>
-                    <Form.Item className="login-form-stem" style={{width:"176px"}}>
-                        选择考试类型
+                    <Form.Item className="login-form-stem" style={{ width: "176px" }}>
+                        <span>
+                            选择考试类型
+                        </span>
+
                         <Cascader options={examTypeOptions} onChange={this.onChangeExamType} placeholder="选择考试类型" />
                     </Form.Item>
-                    <Form.Item className="login-form-stem" style={{width:"176px"}}>
-                        请选择课程类型
+                    <Form.Item className="login-form-stem" style={{ width: "176px" }}>
+                        <span>
+                            请选择课程类型
+                        </span>
+
                         <Cascader options={subjectListOptions} onChange={this.onChangeSubjectType} placeholder="选择课程类型" />
                     </Form.Item>
-                    <Form.Item className="login-form-stem" style={{width:"176px"}}>
-                        请选择题目类型
+                    <Form.Item className="login-form-stem" style={{ width: "176px" }}>
+                        <span>
+                            请选择题目类型
+                            </span>
+
                         <Cascader options={questionsTypeOptions} onChange={this.onChangeQuestionsType} placeholder="选择题目类型" />
                     </Form.Item>
                     <Form.Item>
-                        答案信息
-                        <Editor value={questions_answer} onChange={this.handleChange}>
+                        <span>
+                            答案信息
+                            </span>
+
+                        <Editor value={questions_answer} onChange={this.handleChange} style={{height:"335px"}}>
 
                         </Editor>
                     </Form.Item>

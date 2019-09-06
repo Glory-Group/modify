@@ -137,7 +137,8 @@ export class ShowQuestion extends React.Component<Props> {
         let { history } = this.props
         return (
             <div className="wrap" >
-                <h2 style={{ padding: "20px 0px", marginTop: "10px" }}>查看试题</h2>
+                <div className="title">查看试题</div>
+                <div className="content-box">               
                 <div className="show-top">
                     <div className="subject-top">
                         <label htmlFor="">课程类型</label>
@@ -223,6 +224,7 @@ export class ShowQuestion extends React.Component<Props> {
                             })
                         }
                     </div>
+                </div>
                 </div>
             </div>
         )

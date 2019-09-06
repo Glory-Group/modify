@@ -139,7 +139,7 @@ export class ShowQuestion extends React.Component<propsInfo> {
         dataList: [],
         columns: [],
         tabType: 0,
-        tabTitle:""
+        tabTitle: ""
     }
     constructor(props: any) {
         super(props)
@@ -157,7 +157,7 @@ export class ShowQuestion extends React.Component<propsInfo> {
             })
         }
     }
-    changeTab = (type: number, url: string,tabTitle:string) => {
+    changeTab = (type: number, url: string, tabTitle: string) => {
         this.setState({
             tabType: type,
         })
@@ -171,22 +171,25 @@ export class ShowQuestion extends React.Component<propsInfo> {
 
     }
     public render() {
-        let { dataList, columns, list, tabType,tabTitle} = this.state
+        let { dataList, columns, list, tabType, tabTitle } = this.state
         return (
             <div>
-                <h2>用户展示</h2>
-                {
-                    list.map((item: any, index: number) =>                      
-                        <span key={index}
-                            onClick={() => { this.changeTab(item.type, item.url,item.tabTitle) }}
-                            className={item.type===tabType?"active tab-btn":"tab-btn"}>
-                            {item.tabTitle}
+                <div className="title">用户展示</div>
+                <div className="content-box" style={{ background: "rgba(0,0,0,0)" }}>
+                    {
+                        list.map((item: any, index: number) =>
+                            <span key={index}
+                                onClick={() => { this.changeTab(item.type, item.url, item.tabTitle) }}
+                                className={item.type === tabType ? "active tab-btn" : "tab-btn"}>
+                                {item.tabTitle}
 
-                        </span>                       
-                    )
-                }
-                <h1>{tabTitle}</h1>
-                <Table columns={columns} dataSource={dataList} />
+                            </span>
+                        )
+                    }
+                    <h1>{tabTitle}</h1>
+                    <Table columns={columns} dataSource={dataList} />
+                </div>
+
             </div>
         )
     }
