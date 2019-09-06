@@ -59,7 +59,6 @@ class Question {
     //添加试题接口
     @action async addQuestionsAction(params:any){
         let result=await addQuestions(params)
-        console.log(result,"lllllll")
         return result
     }
 

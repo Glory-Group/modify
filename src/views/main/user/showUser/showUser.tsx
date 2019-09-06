@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { observer, inject } from "mobx-react"
-import { Table, Button, Modal, Input, Form, Icon, message } from 'antd';
+import { Table } from 'antd';
+import "./scss/style.css"
 interface propsInfo {
     user: any
 }
@@ -138,27 +139,29 @@ export class ShowQuestion extends React.Component<propsInfo> {
         dataList: [],
         columns: [],
         tabType: 0,
+        tabTitle:""
     }
     constructor(props: any) {
         super(props)
-        this.getUserList(this.state.tabType,"/user/user")
+        this.getUserList(this.state.tabType, "/user/user")
 
     }
-    getUserList = async (type:number,url: string) => {
+    getUserList = async (type: number, url: string) => {
         let result = await this.props.user.getTabAction(url)
-       // console.log(result.data)
         if (result.code === 1) {
+            result.data.map((item: any, index: number) => item.key = index)
             this.setState({
                 dataList: result.data,
-                columns:this.state.list[type].children
+                columns: this.state.list[type].children,
+                tabTitle: this.state.list[type].tabTitle
             })
         }
     }
-    changeTab = (type: number, url: string) => {
+    changeTab = (type: number, url: string,tabTitle:string) => {
         this.setState({
-            tabType:type
+            tabType: type,
         })
-        this.getUserList(type,url)
+        this.getUserList(type, url)
         let { dataList, list } = this.state
         let listItem = list.filter(item => item.type === type)[0].children
         this.setState({
@@ -168,19 +171,21 @@ export class ShowQuestion extends React.Component<propsInfo> {
 
     }
     public render() {
-        let { dataList, columns, list } = this.state
+        let { dataList, columns, list, tabType,tabTitle} = this.state
         return (
             <div>
-                <h3>用户展示</h3>
+                <h2>用户展示</h2>
                 {
-                    list.map((item: any, index: number) =>
-                        <span key={index} onClick={() => { this.changeTab(item.type, item.url) }} style={{ display: "inline-block", margin: "5px", border: "1px solid #ccc" }}>
+                    list.map((item: any, index: number) =>                      
+                        <span key={index}
+                            onClick={() => { this.changeTab(item.type, item.url,item.tabTitle) }}
+                            className={item.type===tabType?"active tab-btn":"tab-btn"}>
                             {item.tabTitle}
 
-                        </span>
+                        </span>                       
                     )
                 }
-                
+                <h1>{tabTitle}</h1>
                 <Table columns={columns} dataSource={dataList} />
             </div>
         )
