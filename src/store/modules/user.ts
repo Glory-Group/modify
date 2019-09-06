@@ -1,14 +1,14 @@
 import {observable, action} from 'mobx'
 import {getIdentity} from '../../service/index'
-import {getUserList} from "../../service/user"
+import {getTabList} from "../../service/user"
 class User{
    @action async getIdentity(form:any):Promise<any>{
        let result:any=await getIdentity(form)
        console.log(result)
    }
-   @action async getUserAction(){
-    let result:any=await getUserList()
- 
+   @action async getTabAction(url:string){
+    let result:any=await getTabList(url)
+    console.log(result,"llllllllpppppppp")
     if(result.code===1){
         return result;
         
