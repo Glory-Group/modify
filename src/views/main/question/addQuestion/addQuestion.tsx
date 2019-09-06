@@ -1,15 +1,16 @@
 import * as React from 'react'
 import "./scss/style.css"
-import { Form, Icon, Input, Button, Checkbox, Menu, Dropdown, Cascader } from 'antd';
-import { observer, inject } from "mobx-react"
+import { Form, Icon, Input, Button, message, Cascader } from 'antd';
+import { observer, inject } from "mobx-react";
+import Editor from "for-editor";
 const { TextArea } = Input
 interface propsInfo {
     question: any,
     form: any,
     history: any,
-    login:any
+    login: any
 }
-@inject("question","login")
+@inject("question", "login")
 @observer
 export class AddQuestion extends React.Component<propsInfo> {
     state = {
@@ -19,7 +20,9 @@ export class AddQuestion extends React.Component<propsInfo> {
         subject_id: "",//课程id
         questionsTypeOptions: [],
         questions_type_id: "",//试题类型id
-        user_id:"",
+        user_id: "",
+        questions_answer: "",//答案信息
+        questions_stem: "",//题目主题
     }
     constructor(props: propsInfo) {
         super(props)
@@ -27,14 +30,14 @@ export class AddQuestion extends React.Component<propsInfo> {
         this.getSubject()
         this.getQuestionsType()
         this.getUserInfo()
-        
+
     }
     getExamType = async () => {
         let result = await this.props.question.getType()
         if (result.code === 1) {
             let examTypeList: any = []
             result.data.map((item: any, index: number) => {
-                examTypeList.push({ value: item.exam_name, label: item.exam_name, id: item.exam_id,key:item.exam_id })
+                examTypeList.push({ value: item.exam_name, label: item.exam_name, id: item.exam_id, key: item.exam_id })
                 return examTypeList
             })
             this.setState({
@@ -52,7 +55,7 @@ export class AddQuestion extends React.Component<propsInfo> {
         if (result.code === 1) {
             let subjectList: any = []
             result.data.map((item: any, index: number) => {
-                subjectList.push({ value: item.subject_text, label: item.subject_text, id: item.subject_id,key:item.subject_id })
+                subjectList.push({ value: item.subject_text, label: item.subject_text, id: item.subject_id, key: item.subject_id })
                 return subjectList
             })
             this.setState({
@@ -71,7 +74,7 @@ export class AddQuestion extends React.Component<propsInfo> {
         if (result.code === 1) {
             let questionsTypeList: any = []
             result.data.map((item: any, index: number) => {
-                questionsTypeList.push({ value: item.questions_type_text, label: item.questions_type_text, id: item.questions_type_id,key:item.questions_type_id })
+                questionsTypeList.push({ value: item.questions_type_text, label: item.questions_type_text, id: item.questions_type_id, key: item.questions_type_id })
                 return questionsTypeList
             })
             this.setState({
@@ -84,30 +87,46 @@ export class AddQuestion extends React.Component<propsInfo> {
             questions_type_id: item[0].id
         })
     }
-    getUserInfo=async()=>{
-        let result=await this.props.login.getUserInfoAction()
-        if(result.code===1){
+    getUserInfo = async () => {
+        let result = await this.props.login.getUserInfoAction()
+        if (result.code === 1) {
             this.setState({
-                user_id:result.data.user_id
+                user_id: result.data.user_id
             })
         }
 
     }
+    handleChange = (value: any) => {
+        this.setState({
+            questions_answer: value
+        })
+    }
+    changeStem = (value: any) => {
+        this.setState({
+            questions_stem: value
+        })
+    }
     handleSubmit = (e: any) => {
         e.preventDefault();
-        let {exam_id,subject_id,questions_type_id,user_id}=this.state
- 
-        this.props.form.validateFields((err: Error, values: any) => {
+        let { exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem } = this.state
+        this.props.form.validateFields(async(err: Error, values: any) => {
             if (!err) {
-                console.log('Received values of form: ', values,exam_id,"1",subject_id,"2",questions_type_id,"3",user_id);
+                //console.log(questions_answer, values, exam_id, "1", subject_id, "2", questions_type_id, "3", user_id);
+                let params = {
+                    exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem,title:values.title
+                }
+                let result=await this.props.question.addQuestionsAction(params)
+                if(result.code===1){
+                    message.info(result.msg)
+                }
             }
         });
     };
     public render() {
         const { getFieldDecorator } = this.props.form;
-        const { examTypeOptions, subjectListOptions, questionsTypeOptions } = this.state
+        const { examTypeOptions, subjectListOptions, questionsTypeOptions, questions_answer, questions_stem } = this.state
         return (
-            <div>
+            <div className="add-question-content">
                 添加试题
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <Form.Item className="login-form-stem">
@@ -117,43 +136,35 @@ export class AddQuestion extends React.Component<propsInfo> {
                             rules: [{ required: true, message: 'Please input questions title!' }]
                         })(
                             <Input
-                                placeholder="请输入提干"
+                                placeholder="请输入题目标题，不超过20个字"
+                                style={{width:"500px",display:"block",marginTop:"10px"}}
                             />,
                         )}
                     </Form.Item>
                     <Form.Item>
                         题目主题
-                        {getFieldDecorator('questions_stem	', {
-                            validateTrigger: "onBlur",
-                            rules: [{ required: true, message: 'Please input questions stem!' }]
-                        })(
-                            <TextArea>
-                                输入题目主题
-                           </TextArea>
-                        )}
+
+                        <Editor value={questions_stem} onChange={this.changeStem}>
+
+                        </Editor>
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className="login-form-stem" style={{width:"176px"}}>
                         选择考试类型
                         <Cascader options={examTypeOptions} onChange={this.onChangeExamType} placeholder="选择考试类型" />
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className="login-form-stem" style={{width:"176px"}}>
                         请选择课程类型
                         <Cascader options={subjectListOptions} onChange={this.onChangeSubjectType} placeholder="选择课程类型" />
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className="login-form-stem" style={{width:"176px"}}>
                         请选择题目类型
                         <Cascader options={questionsTypeOptions} onChange={this.onChangeQuestionsType} placeholder="选择题目类型" />
                     </Form.Item>
                     <Form.Item>
                         答案信息
-                        {getFieldDecorator('questions_answer	', {
-                            validateTrigger: "onBlur",
-                            rules: [{ required: true, message: 'Please input questions answer!' }]
-                        })(
-                            <TextArea>
-                                输入答案信息
-                           </TextArea>
-                        )}
+                        <Editor value={questions_answer} onChange={this.handleChange}>
+
+                        </Editor>
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" className="login-form-button">

@@ -36,6 +36,11 @@ export let addType=(params:any)=>{
 export let getExamType=()=>{
     return request.get("/exam/examType")
 }
+//添加试题接口
+export let addQuestions=(params:any)=>{
+    return request.post("/exam/questions",params)
+}
+
 
 
 
