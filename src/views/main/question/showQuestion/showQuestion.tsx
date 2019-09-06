@@ -2,6 +2,7 @@ import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Select, Button } from "antd"
 import ShowItem from "../../../../components/question/showItem"
+import "./scss/index.css"
 const { Option } = Select;
 interface Props {
     question: any,
@@ -26,8 +27,6 @@ export class ShowQuestion extends React.Component<Props> {
         const datas = await this.props.question.getSubject();
         const examType = await this.props.question.getType();
         const questionType = await this.props.question.questionType();
-        console.log(result)
-      //  this.state.subject=[...this.refs.subject.children]
         this.setState({ dataList: result.data, subjectList: datas.data, examType:examType.data,questionType:questionType.data,subject:this.refs.subject })
     }
     constructor(props: any) {
@@ -49,7 +48,7 @@ export class ShowQuestion extends React.Component<Props> {
                     <div className="subject-top">
                         <label htmlFor="">课程类型</label>
                         <div className="subject-list" ref="subject" >
-                                   <div  >
+                                   <div>
                                      <span className="subject-all"   >All</span> 
                                     </div>
                             {
@@ -64,10 +63,10 @@ export class ShowQuestion extends React.Component<Props> {
                         </div>
                     </div>
                     <div className="subject-bottom">
-                        <div>
+                        <div className="bottom-item" >
                             <label htmlFor="">考试类型</label>
                             <div className="exam-type">
-                                <Select defaultValue="" style={{ width: 120, margin: "0 11px", height: 30 }}>
+                                <Select defaultValue="" style={{ width: "80%", margin: "0 11px", height: 30 }}>
                                     {
                                         examType && examType.map((item: any, index) => {
                                             return <Option value={item.exam_name} key={index} >{item.exam_name}</Option>
@@ -76,10 +75,10 @@ export class ShowQuestion extends React.Component<Props> {
                                 </Select>
                             </div>
                         </div>
-                        <div>
+                        <div  className="bottom-item" >
                             <label htmlFor="">题目类型</label>
                             <div className="exam-type">
-                                <Select defaultValue="" style={{ width: 120, margin: "0 11px", height: 30 }}>
+                                <Select defaultValue="" style={{ width:"80%", margin: "0 11px", height: 30 }}>
                                     {
                                         questionType && questionType.map((item: any, index) => {
                                             return <Option value={item.questions_type_text} key={index} >{item.questions_type_text}</Option>
@@ -88,7 +87,7 @@ export class ShowQuestion extends React.Component<Props> {
                                 </Select>
                             </div>
                         </div>
-                        <div>
+                        <div  className="bottom-item" >
                             <Button
                                 type="primary"
                                 icon="search"
@@ -96,6 +95,9 @@ export class ShowQuestion extends React.Component<Props> {
                             >
                                 查询
                             </Button>
+                        </div>
+                        <div  className="bottom-item" >
+
                         </div>
                     </div>
                 </div>

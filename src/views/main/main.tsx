@@ -5,16 +5,11 @@ import Head from "../../components/header/header"
 import Slider from "../../components/sider/index"
 import ContentForm from "../../components/content/index"
 import RouterView from "../../router/routerview"
-const { Content, Footer, Header, Sider } = Layout;
-
-const { SubMenu } = Menu;
 
  export class SiderDemo extends React.Component {
   public state = {
     collapsed: false,
   };
-
-
 
   public render() {
     return (
@@ -23,7 +18,6 @@ const { SubMenu } = Menu;
         <Layout>
           <Slider></Slider>
           <ContentForm>
-            {/* <RouterView routes={this.props['routes']} /> */}
           {this.props.children}
           </ContentForm>
 

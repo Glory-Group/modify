@@ -1,5 +1,5 @@
 import * as React from 'react'
-import "./scss/index.css"
+
 export class Question extends React.Component {
     public  render() {
         return (
