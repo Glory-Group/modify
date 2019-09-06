@@ -96,6 +96,10 @@ export class TypeQuestion extends React.Component<propsInfo> {
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
+                <div className="title">
+                    试题分类
+                </div>
+                <div className="content-box">
                 <div>
                     <Button type="primary" onClick={this.showModal} style={{ margin: "10px" }}>
                         添加类型
@@ -121,6 +125,8 @@ export class TypeQuestion extends React.Component<propsInfo> {
                 </div>
                 <Table columns={columns} dataSource={questionTypeList} />
 
+                </div>
+               
 
             </div>
         )

@@ -15,7 +15,7 @@ export class ContentForm extends React.Component {
 
     public  render() {
         return (
-          <Content>
+          <Content style={{position:"absolute",top:"64px",left:"200px",width:"80%"}}>
             {this.props.children}
           </Content>
         )

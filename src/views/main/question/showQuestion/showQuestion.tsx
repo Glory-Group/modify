@@ -117,7 +117,8 @@ export class ShowQuestion extends React.Component<Props> {
         let { history } = this.props
         return (
             <div className="wrap" >
-                <h2 style={{ padding: "20px 0px", marginTop: "10px" }}>查看试题</h2>
+                <div className="title">查看试题</div>
+                <div className="content-box">               
                 <div className="show-top">
                     <div className="subject-top">
                         <label htmlFor="">课程类型</label>
@@ -142,7 +143,7 @@ export class ShowQuestion extends React.Component<Props> {
                         <div className="bottom-item" >
                             <label htmlFor="">考试类型</label>
                             <div className="exam-type">
-                                <Select defaultValue="" style={{ width: "80%", margin: "0 11px", height: 30 }}>
+                                <Select defaultValue="" onChange={this.handleText} style={{ width: "80%", margin: "0 11px", height: 30 }}>
                                     {
                                         examType && examType.map((item: any, index) => {
                                             return <Option value={item.exam_name} key={index} >{item.exam_name}</Option>
@@ -154,7 +155,7 @@ export class ShowQuestion extends React.Component<Props> {
                         <div  className="bottom-item" >
                             <label htmlFor="">题目类型</label>
                             <div className="exam-type">
-                                <Select defaultValue="" style={{ width:"80%", margin: "0 11px", height: 30 }}>
+                                <Select defaultValue="" onChange={this.handleQuestion} style={{ width:"80%", margin: "0 11px", height: 30 }}>
                                     {
                                         questionType && questionType.map((item: any, index) => {
                                             return <Option value={item.questions_type_text} key={index} >{item.questions_type_text}</Option>
@@ -203,6 +204,7 @@ export class ShowQuestion extends React.Component<Props> {
                             })
                         }
                     </div>
+                </div>
                 </div>
             </div>
         )
