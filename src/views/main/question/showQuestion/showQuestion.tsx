@@ -82,7 +82,7 @@ export class ShowQuestion extends React.Component<Props> {
             console.log(data)
             this.setState({ dataList: data })
         }
-        // subjectType&&textType?item.subject_text===subjectType&&item.exam_name===textType:subjectType&&questionType?item.subject_text===subjectType&&item.questions_type_text===questionType:textType&&questionType?item.exam_name===textType&&item.questions_type_text===questionType:subjectType&&textType&&questionType?item.subject_text===subjectType&&item.exam_name===textType&&item.questions_type_text===questionType:''
+        
     }
     handleText: any = async (e: any) => {
         let { searchType } = this.state
@@ -142,7 +142,7 @@ export class ShowQuestion extends React.Component<Props> {
                         <div className="bottom-item" >
                             <label htmlFor="">考试类型</label>
                             <div className="exam-type">
-                                <Select defaultValue="" style={{ width: "80%", margin: "0 11px", height: 30 }}>
+                                <Select defaultValue="" onChange={this.handleText} style={{ width: "80%", margin: "0 11px", height: 30 }}>
                                     {
                                         examType && examType.map((item: any, index) => {
                                             return <Option value={item.exam_name} key={index} >{item.exam_name}</Option>
@@ -154,7 +154,7 @@ export class ShowQuestion extends React.Component<Props> {
                         <div  className="bottom-item" >
                             <label htmlFor="">题目类型</label>
                             <div className="exam-type">
-                                <Select defaultValue="" style={{ width:"80%", margin: "0 11px", height: 30 }}>
+                                <Select defaultValue="" onChange={this.handleQuestion} style={{ width:"80%", margin: "0 11px", height: 30 }}>
                                     {
                                         questionType && questionType.map((item: any, index) => {
                                             return <Option value={item.questions_type_text} key={index} >{item.questions_type_text}</Option>
