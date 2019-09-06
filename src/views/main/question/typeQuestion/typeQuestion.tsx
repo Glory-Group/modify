@@ -119,7 +119,7 @@ export class TypeQuestion extends React.Component<propsInfo> {
                         </Form.Item>
                     </Modal>
                 </div>
-                <Table columns={columns} dataSource={questionTypeList} />
+                <Table columns={columns}  dataSource={questionTypeList} />
 
 
             </div>

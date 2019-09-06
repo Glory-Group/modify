@@ -12,6 +12,8 @@ class Question {
         const { code, data, msg } = result
         if (code === 1) {
             return result
+        }else {
+            return result
         }
 
     }
@@ -20,6 +22,8 @@ class Question {
         let result: any = await getSubject(params);
         const { code, data, msg } = result;
         if (code === 1) {
+            return result
+        }else {
             return result
         }
     }
@@ -30,6 +34,8 @@ class Question {
         const { code, data, msg } = result;
         if (code === 1) {
             return result
+        }else {
+            return result
         }
     }
 
@@ -39,6 +45,8 @@ class Question {
         const { code, data, msg } = result;
         if (code === 1) {
             return result
+        }else {
+            return result
         }
     }
     //按条件获取试题
@@ -46,6 +54,8 @@ class Question {
         let result: any = await getCondition(params);
         const { code, data, msg } = result;
         if (code === 1) {
+            return result
+        }else {
             return result
         }
     }

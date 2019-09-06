@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import "./scss/index.css"
+import Editor from "for-editor"
 interface PropsInfo {
     match: any,
     question: any
@@ -11,7 +12,7 @@ interface PropsInfo {
 
 export class ShowDetail extends React.Component<PropsInfo> {
     state = {
-        dataList: []
+        dataList: [],
     }
     getList: any = async () => {
         let { match } = this.props
@@ -21,7 +22,8 @@ export class ShowDetail extends React.Component<PropsInfo> {
         let { questions_type_id, subject_id, exam_id, questions_id } = data[0]
         const dataList = await this.props.question.condition({ questions_id, questions_type_id, subject_id, exam_id })
         console.log(dataList)
-        this.setState({ dataList:dataList.data })
+        this.setState({ dataList: dataList.data })
+
 
     }
     constructor(props: any) {
@@ -47,14 +49,18 @@ export class ShowDetail extends React.Component<PropsInfo> {
                                     <span style={{ color: "#fa8c16", background: " #fff7e6", border: "1px solid #ffd591", margin: "0 8px 0 0", padding: "0 7px" }} >{item.exam_name}</span>
                                 </div>
                                 <div style={{ margin: "0 0 4px" }} > <span style={{ color: "rgba(0,0,0,0.65)" }} >{item.title}</span> </div>
-                                <div>
-                                    {item.questions_stem}
-                                </div>
+
+                                <Editor value={item.questions_stem} style={{width:"654px"}} >
+                                </Editor>
                             </div>
                             <div className="mid"></div>
                             <div className="right">
-
+                                <Editor value={item.questions_answer} style={{}}>
+                                </Editor>
                             </div>
+
+
+
 
                         </div>
                     })

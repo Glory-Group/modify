@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Select, Button } from "antd"
+import { Select, Button,message } from "antd"
 import ShowItem from "../../../../components/question/showItem"
 import "./scss/index.css"
 const { Option } = Select;
@@ -18,7 +18,6 @@ export class ShowQuestion extends React.Component<Props> {
         subjectList: [],
         examType: [],
         questionType: [],
-        subject: [],
         count: -1,
         searchType: {
             subjectType: '',
@@ -32,12 +31,33 @@ export class ShowQuestion extends React.Component<Props> {
         const datas = await this.props.question.getSubject();
         const examType = await this.props.question.getType();
         const questionType = await this.props.question.questionType();
-        //  this.state.subject=[...this.refs.subject.children]
-        this.setState({ dataList: result.data, subjectList: datas.data, examType: examType.data, questionType: questionType.data, subject: this.refs.subject })
+        if(result.code===1){
+            this.setState({dataList: result.data})
+        }else{
+            message.error(result.msg)
+        }
+
+        if(datas.code===1){
+            this.setState({subjectList: datas.data})
+        }else{
+            message.error(datas.msg)
+        }
+
+        if(examType.code===1){
+            this.setState({examType: examType.data})
+        }else{
+            message.error(examType.msg)
+        }
+
+        if(questionType.code===1){
+            this.setState({questionType: questionType.data})
+        }else{
+            message.error(questionType.msg)
+        }
+        
     }
     searchList: any = async () => {
-        let { dataList, searchType } = this.state
-        console.log(searchType)
+        let { searchType } = this.state
         let { subjectType, textType, questionType } = searchType
         const result = await this.props.question.getQuestion();
         if (searchType.subjectType === 'All') {
