@@ -20,18 +20,15 @@ class Login{
             if(form.remember){
                   window.localStorage.setItem('account',JSON.stringify(form))
             }else{
-                window.localStorage.removeItem('account')
+                 window.localStorage.removeItem('account')
             }
            //2.判断是否七天免登陆
             if(form.autoLogin){
-                console.log(result.token)
                setToken(result.token);
             }
         }
         return result;
-
     }
-
     //退出登录
 
     @action async loginOut():Promise<any>{

@@ -19,7 +19,7 @@ const columns=[
         title: "操作",
         dataIndex: '',
         key: 'x',
-        render: () => <span><a>删除</a></span>,
+        render: () => <span><a>删除</a></span>
     }
 ]
 
@@ -118,8 +118,9 @@ export class ClassRoom extends React.Component<PropsInfo> {
                        
                         
                     </Modal>
+                    <Table columns={columns}  dataSource={roomList} />
                 </div>
-                <Table columns={columns}  dataSource={roomList} />
+               
             </div>
         )
     }

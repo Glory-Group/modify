@@ -25,6 +25,7 @@ let listText = Loadable({ loading: Loading, loader: () => import("../views/main/
 let addUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/addUser/addUser") })
 let showUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/showUser/showUser") })
 let showDetail=Loadable({loading:Loading,loader:()=>import("../views/main/question/showQuestion/detail/index")})
+let classMate=Loadable({loading:Loading,loader:()=>import("../views/main/marking/classMate/index")})
 let routes = [
     {
         component: login,
@@ -52,6 +53,9 @@ let routes = [
                 children:[{
                     component:watingClass,
                     path:"/main/marking/watingClass"
+                },{
+                    component:classMate,
+                    path:"/main/marking/classMate/:id"
                 }],
                 component: marking,
                 path: "/main/marking"

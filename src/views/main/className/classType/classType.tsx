@@ -20,7 +20,7 @@ const columns = [
     {
         title: "课程名",
         dataIndex: 'subject_text',
-        key: 'grade_id'+'geade_name'
+        key:'subject_id'
     },
     {
         title: "教室号",
@@ -167,8 +167,9 @@ export class ClassType extends React.Component<PropsInfo> {
                             </Select>)}
                         </Form.Item>
                     </Modal>
+                    <Table columns={columns}  dataSource={gradeList} />
                 </div>
-                <Table columns={columns}  dataSource={gradeList} />
+               
             </div>
         )
     }
