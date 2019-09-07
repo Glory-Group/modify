@@ -6,7 +6,7 @@ interface PropsInfo {
     classType: any,
     form: any,
     history: any,
-    question:any
+    question: any
 }
 
 const { Option } = Select
@@ -20,7 +20,7 @@ const columns = [
     {
         title: "课程名",
         dataIndex: 'subject_text',
-        key:'subject_id'
+        key: 'subject_id'
     },
     {
         title: "教室号",
@@ -34,7 +34,7 @@ const columns = [
     }
 ]
 
-@inject('classType','question')
+@inject('classType', 'question')
 @observer
 
 
@@ -46,20 +46,28 @@ export class ClassType extends React.Component<PropsInfo> {
         ModalText: 'Content of the modal',
         visible: false,
         confirmLoading: false,
-        subjectList:[]
+        subjectList: [],
+        classRoomList: []
     }
     getList = async () => {
         let classGrade = await this.props.classType.getTabAction("/manger/grade")
-        let subject= await this.props.question.getSubject()
-       
-        if(classGrade.code===1){
-            classGrade.data.map((item:any,index:number)=>item.key=index)
-            this.setState({gradeList: classGrade.data})
+
+        let subject = await this.props.question.getSubject()
+
+        if (classGrade.code === 1) {
+            classGrade.data.map((item: any, index: number) => item.key = index)
+            this.setState({ gradeList: classGrade.data })
         }
-         if(subject.code===1){
-            this.setState({ subjectList:subject.data})
+        if (subject.code === 1) {
+            this.setState({ subjectList: subject.data })
         }
-       
+
+    }
+    getRoomList = async () => {
+        let classRoom = await this.props.classType.getTabAction("/manger/room")
+        if (classRoom.code === 1) {
+            this.setState({ classRoomList: classRoom.data })
+        }
     }
     showModal = () => {
         this.setState({
@@ -73,21 +81,21 @@ export class ClassType extends React.Component<PropsInfo> {
         this.props.form.validateFields(async (err: any, values: any) => {
             if (!err) {
                 console.log(values)
-          
-                 let result = await this.props.classType.addListAction("/manger/grade",values)
+
+                let result = await this.props.classType.addListAction("/manger/grade", values)
                 if (result.code === 1) {
                     message.info(result.msg);
-                    this.props.history.go(0)
-                    this.setState({                       
+                    this.getList()
+                    this.setState({
                         confirmLoading: true,
-                      });
+                    });
                     setTimeout(() => {
                         this.setState({
                             visible: false,
                             confirmLoading: false,
                         });
                     }, 2000);
-                }else {
+                } else {
                     message.error(result.msg);
                 }
 
@@ -102,9 +110,10 @@ export class ClassType extends React.Component<PropsInfo> {
     constructor(props: any) {
         super(props)
         this.getList()
+        this.getRoomList()
     }
     public render() {
-        let { gradeList, visible, confirmLoading,subjectList } = this.state
+        let { gradeList, visible, confirmLoading, subjectList, classRoomList } = this.state
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
@@ -135,16 +144,16 @@ export class ClassType extends React.Component<PropsInfo> {
                         </Form.Item>
                         <Form.Item label="教室号">
                             {getFieldDecorator('room_id', {
-                                initialValue:"请选择教室号",
+                                initialValue: "请选择教室号",
                                 rules: [
                                     {
                                         required: true,
                                         message: 'Please input your ClassRome-Number!',
                                     },
                                 ],
-                            })(<Select style={{width:"100%"}} >
+                            })(<Select style={{ width: "100%" }} >
                                 {
-                                    gradeList && gradeList.map((item: any, index: number) => {
+                                    classRoomList && classRoomList.map((item: any, index: number) => {
                                         return <Option value={item.room_id} key={index} >{item.room_text}</Option>
                                     })
                                 }
@@ -152,14 +161,14 @@ export class ClassType extends React.Component<PropsInfo> {
                         </Form.Item>
                         <Form.Item label="课程名">
                             {getFieldDecorator('subject_id', {
-                                initialValue:"课程名",
+                                initialValue: "课程名",
                                 rules: [
                                     {
                                         required: true,
                                         message: 'Please input your Subject!',
                                     },
                                 ],
-                            })(<Select style={{width:"100%"}} >
+                            })(<Select style={{ width: "100%" }} >
                                 {
                                     subjectList && subjectList.map((item: any, index: number) => {
                                         return <Option value={item.subject_id} key={item.subject_id} >{item.subject_text}</Option>
@@ -168,9 +177,9 @@ export class ClassType extends React.Component<PropsInfo> {
                             </Select>)}
                         </Form.Item>
                     </Modal>
-                    <Table columns={columns}  dataSource={gradeList} />
+                    <Table columns={columns} dataSource={gradeList} />
                 </div>
-               
+
             </div>
         )
     }

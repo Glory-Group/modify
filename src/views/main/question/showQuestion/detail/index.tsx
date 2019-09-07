@@ -14,6 +14,11 @@ export class ShowDetail extends React.Component<PropsInfo> {
     state = {
         dataList: [],
     }
+ 
+    constructor(props: any) {
+        super(props)
+        this.getList()
+    }
     getList: any = async () => {
         let { match } = this.props
         let id = match.params.id
@@ -21,14 +26,8 @@ export class ShowDetail extends React.Component<PropsInfo> {
         const data = result.data.filter((item: any) => item.questions_id === id)
         let { questions_type_id, subject_id, exam_id, questions_id } = data[0]
         const dataList = await this.props.question.condition({ questions_id, questions_type_id, subject_id, exam_id })
-        console.log(dataList)
+        window.localStorage.setItem("questionDetail",JSON.stringify(dataList.data))
         this.setState({ dataList: dataList.data })
-
-
-    }
-    constructor(props: any) {
-        super(props)
-        this.getList()
     }
     public render() {
         let { dataList } = this.state

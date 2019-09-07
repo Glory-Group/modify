@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Radio, Input, Select } from 'antd';
+import { Button, Radio, Input, Select,message } from 'antd';
 import { inject, observer } from 'mobx-react'
 import "./scss/index.css"
 const { Option } = Select
@@ -22,8 +22,12 @@ export class AddUser extends React.Component<PropsInfo> {
         userList: [],
         api_authorityList: [],
         view_authorityList: [],
-        user_name:'',
-        user_pwd:'',
+        user_name:'',//用户名
+        user_pwd:'',//密码
+        identity_id:'',//身份id
+        defaultUser:"请输入用户名",
+        defaultPwd:"请输入密码",
+        defaultId:"请选择身份id"
     };
     constructor(props: any) {
         super(props)
@@ -54,18 +58,31 @@ export class AddUser extends React.Component<PropsInfo> {
     //handleUser
     handleUser=(e:any)=>{
         if(e.target){
-            console.log(e.target.value)
+            let type=e.target.name
+            this.setState({[type]:e.target.value})
         }else{
-            console.log(e)
+           this.setState({identity_id:e})
         }
        
     }
     //addUser
     addUser=async()=>{
-      //let userResult=await this.props.user.addListAction("/user")
+        let {user_name,user_pwd,identity_id}=this.state
+       let userResult=await this.props.user.addListAction("/user",{user_name,user_pwd,identity_id})
+       if(userResult.code===1){
+           message.success(userResult.msg)
+       }else{
+           message.error(userResult.msg)
+       }
+    }
+    //resetAddUser
+    resetAddUser=()=>{
+        console.log(1)
+        let {defaultId,defaultPwd,defaultUser}=this.state
+        this.setState({defaultId:defaultId,defaultPwd:defaultPwd,defaultUser:defaultUser})
     }
     public render() {
-        const { size, identify, isShow, identityList, userList, api_authorityList, view_authorityList } = this.state
+        const { size, identify, isShow, identityList, userList, api_authorityList, view_authorityList,defaultUser,defaultPwd,defaultId } = this.state
         return (
             <div className="addUser" >
                 <div className="title">添加用户</div>
@@ -87,23 +104,23 @@ export class AddUser extends React.Component<PropsInfo> {
                             </Select>
                         </div>
                         <div className="wrap">
-                            <Input placeholder="请输入用户名" onChange={this.handleUser}  style={{ width: 323, height: 30 }} ></Input>
+                            <Input placeholder={defaultUser} onChange={this.handleUser} name="user_name" style={{ width: 323, height: 30 }} ></Input>
                         </div>
                         <div className="wrap">
-                            <Input.Password placeholder="请输入密码" onChange={this.handleUser} style={{ width: 323, height: 30 }} />
+                            <Input.Password placeholder={defaultPwd} onChange={this.handleUser} name="user_pwd" style={{ width: 323, height: 30 }} />
                         </div>
                         <div className="wrap">
-                            <Select style={{ width: 150 }} defaultValue="请选择身份id" onChange={this.handleUser} >
+                            <Select style={{ width: 150 }} defaultValue={defaultId} onChange={this.handleUser} >
                                 {
                                     identityList && identityList.map((item: any, index: number) => {
-                                        return <Option value={item.identity_text} key={item.identity_id} >{item.identity_text}</Option>
+                                        return <Option value={item.identity_id} key={item.identity_id} >{item.identity_text}</Option>
                                     })
                                 }
                             </Select>
                         </div>
                         <div className="wrap">
-                            <Button style={{ background: "#295eff", width: 111 }} onClick={this.addUser}  type="primary">确定</Button>
-                            <Button>重置</Button>
+                            <Button style={{ background: "#295eff", width: 111 }} onClick={this.addUser}   type="primary">确定</Button>
+                            <Button onClick={this.resetAddUser} >重置</Button>
                         </div>
                     </div>
                     <div className="box-item">

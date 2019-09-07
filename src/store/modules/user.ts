@@ -14,9 +14,8 @@ class User{
 
   @action async addListAction(url:string,params:any){
       let result:any=await addList(url,params)
-      if(result.code===1){
           return result;
-      }
+      
   }
 }
 export default User;
