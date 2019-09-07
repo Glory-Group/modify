@@ -51,8 +51,9 @@ export class ClassType extends React.Component<PropsInfo> {
     getList = async () => {
         let classGrade = await this.props.classType.getTabAction("/manger/grade")
         let subject= await this.props.question.getSubject()
-        classGrade.data.map((item: any, index: number) => item.key = index)
+       
         if(classGrade.code===1){
+            classGrade.data.map((item:any,index:number)=>item.key=index)
             this.setState({gradeList: classGrade.data})
         }
          if(subject.code===1){

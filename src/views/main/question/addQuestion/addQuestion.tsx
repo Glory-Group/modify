@@ -111,7 +111,6 @@ export class AddQuestion extends React.Component<propsInfo> {
         let { exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem } = this.state
         this.props.form.validateFields(async (err: Error, values: any) => {
             if (!err) {
-                //console.log(questions_answer, values, exam_id, "1", subject_id, "2", questions_type_id, "3", user_id);
                 let params = {
                     exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem, title: values.title
                 }

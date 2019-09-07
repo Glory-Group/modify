@@ -1,13 +1,222 @@
 import * as React from 'react'
+import { Form, Input, Cascader, Button, Table, message } from 'antd';
+import { observer, inject } from "mobx-react";
+import "./scss/listText.css"
+const { Column, ColumnGroup } = Table;
+interface propsInfo {
+    form: any,
+    question: any,
+    text: any,
+    classType: any,
+    history: any
 
-export class Student extends React.Component {
-    public  render() {
+}
+@inject("question", "login", "text", "classType")
+@observer
+export class Student extends React.Component<propsInfo> {
+    state = {
+        roomOptions: [],//教室号
+        room_id: "",//教室id
+        gradOptions: [],
+        grade_id: "",//班级名
+        studentList: [],
+        startTime: "",
+        endTime: "",
+        newList: [],
+        columns: [
+            {
+                title: '姓名',
+                dataIndex: 'student_name',
+                key: 'student_name',
+            },
+            {
+                title: '学号',
+                dataIndex: 'student_id',
+                key: 'student_id',
+            },
+            {
+                title: '班级',
+                dataIndex: 'grade_name',
+                key: 'grade_name',
+            },
+            {
+                title: '教室',
+                dataIndex: "room_text",
+                key: 'room_text',
+            },
+            {
+                title: '密码',
+                dataIndex: 'student_pwd',
+                key: 'student_pwd',
+            },
+            {
+                title: '操作',
+                key: 'action',
+                render: (text: any, record: any) => (
+                    <span>
+                        <a onClick={() => { this.delStudent(text, record) }}>删除</a>
+                    </span>
+                ),
+            },
+
+        ],
+    }
+    constructor(props: propsInfo) {
+        super(props)
+        this.getRoomList()
+        this.getGradeList()
+        this.getStudentInfo()
+
+    }
+    handleSubmit = (e: any) => {
+        e.preventDefault();
+        this.props.form.validateFields(async (err: Error, values: any) => {
+            if (!err) {
+                let { studentList, room_id, grade_id } = this.state
+                let { student_name } = values
+                let newArr = studentList.filter((item: any) => {
+                    if (student_name && room_id && grade_id) {
+                        return item.student_name === student_name && item.room_id === room_id && item.grade_id === grade_id
+                    } else if (student_name && room_id && !grade_id) {
+                        return item.student_name === student_name && item.room_id === room_id
+                    } else if (student_name && !room_id && grade_id) {
+                        return item.student_name === student_name && item.grade_id === grade_id
+                    } else if (!student_name && room_id && grade_id) {
+                        return item.room_id === room_id && item.grade_id === grade_id
+                    } else if (student_name && !room_id && !grade_id) {
+                        return item.student_name === student_name
+                    } else if (!student_name && room_id && !grade_id) {
+                        return item.room_id === room_id
+                    } else if (!student_name && !room_id && grade_id) {
+                        return item.grade_id === grade_id
+                    }else{
+                        return []
+                    }
+                    
+                })
+                this.setState({
+                    newList: newArr
+                })
+            }
+        });
+    };
+    delStudent = async (text: any, record: any) => {
+        console.log(text.student_id)
+        let result = await this.props.classType.delStudentAction(text.student_id)
+        if (result.code === 1) {
+            message.info(result.msg)
+            this.props.history.go(0)
+        }
+
+    }
+    getStudentInfo = async () => {
+        let result = await this.props.classType.getStudentInfoAction()
+        if (result.code === 1) {
+            result.data.map((item: any, index: number) => {
+                item.key = index
+            })
+
+            this.setState({
+                studentList: result.data
+            })
+        }
+    }
+    getRoomList = async () => {
+        let result = await this.props.classType.getRoomListAction()
+        if (result.code === 1) {
+            let roomList: any = []
+            result.data.map((item: any, index: number) => {
+                roomList.push({ value: item.room_text, label: item.room_text, id: item.room_id, key: item.room_id })
+                return roomList
+            })
+            this.setState({
+                roomOptions: roomList
+            })
+        }
+    }
+    onChangeRoomList = (value: any, item: any) => {
+        if (item[0]) {
+            this.setState({
+                room_id: item[0].id
+            })
+        } else {
+            this.setState({
+                room_id: ""
+            })
+        }
+
+    }
+    getGradeList = async () => {
+        let result = await this.props.classType.getGradeListAction()
+        if (result.code === 1) {
+            let gradeList: any = []
+            result.data.map((item: any, index: number) => {
+                gradeList.push({ value: item.grade_name, label: item.grade_name, id: item.grade_id, key: item.grade_id })
+                return gradeList
+            })
+            this.setState({
+                gradOptions: gradeList
+            })
+        }
+
+    }
+    onChangeGradeList = (value: any, item: any) => {
+        if (item[0]) {
+            this.setState({
+                grade_id: item[0].id
+            })
+        } else {
+            this.setState({
+                grade_id: ""
+            })
+        }
+    }
+    public render() {
+        const { getFieldDecorator } = this.props.form;
+
+        let { roomOptions, gradOptions, columns, studentList, newList } = this.state
         return (
             <div>
-                Student
+                <div className="title">
+                    <span>学生管理</span>
+                </div>
+                <div className="content-box">
+                    <Form onSubmit={this.handleSubmit} className="login-form">
+                        <Form.Item className="login-form-stem">
+                            {getFieldDecorator('student_name', {
+                                // validateTrigger: "onBlur",
+                                // rules: [{ required: true, message: 'Please input student name!' }]
+                            })(
+                                <Input
+                                    placeholder="请输入学生姓名"
+                                    style={{ width: "180px", display: "inline-block" }}
+                                />,
+                            )}
+                            <Cascader options={roomOptions} onChange={this.onChangeRoomList} placeholder="选择教室号"
+                                className="select-box"
+                            />
+                            <Cascader options={gradOptions} onChange={this.onChangeGradeList} placeholder="选择班级名"
+                                className="select-box"
+                            />
+                            <Button type="primary" htmlType="submit">
+                                搜索
+                            </Button>
+                        </Form.Item>
+
+                    </Form>
+                    <div className="exam-list">
+                        <div className="sub-title">
+                            <span>试卷列表</span>
+
+                        </div>
+                        <div>
+                            <Table columns={columns} dataSource={newList.length ? newList : studentList} />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default Student
+export default Form.create({ name: 'normal_login' })(Student)

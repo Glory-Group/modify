@@ -34,6 +34,7 @@ export class AddText extends React.Component<propsInfo> {
             if (!err) {
                 let {exam_id,subject_id,number,startValue,endValue}=this.state
                 let {title}=values
+                //将moment格式转为时间戳
                 let start_time=+moment(startValue).format('x')
                 let end_time=+moment(endValue).format('x')
                 let params={
