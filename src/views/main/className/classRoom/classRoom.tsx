@@ -35,8 +35,9 @@ export class ClassRoom extends React.Component<PropsInfo> {
     }
     getList=async()=>{
         let classRoom=await this.props.classType.getTabAction("/manger/room")
-        console.log(classRoom)
+       
         if(classRoom.code===1){
+            classRoom.data.map((item:any,index:number)=>item.key=index)
             this.setState({roomList:classRoom.data})
         }else{
             message.error(classRoom.msg)

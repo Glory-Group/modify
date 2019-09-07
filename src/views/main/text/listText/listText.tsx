@@ -92,32 +92,8 @@ export class ListText extends React.Component<propsInfo> {
       
             this.setState({
                 examList: result.exam
-                //startTime:""+result.exam.start_time+(8 * 3600 * 1000).toString.toJSON().substr(0, 19).replace('T', ' ')
             })
-            /**
-      *avatar: null
- description: null
- end_time: "1553740200000"
- exam_exam_id: "gh1ye3-0i6opd"
- exam_id: "8sc5d7-7p5f9e-cb2zii-ahe5i"
- exam_name: "周考1"
- exam_type: "8sc5d7-7p5f9e-cb2zii-ahe5i"
- grade_id: (2) ["oery4-9h55c-76sdkj-fba5ag", "we0eya-r2td2b-2h4yhg-ggxp1vf"]
- grade_name: (2) ["1609A", "1612A"]
- identity_id: "63no9p-8y0k4"
- number: 3
- question_ids: "["4t0rar-39c33-wq098t-phh5ht","4vu7t9-t9vv08-chvz3r-n8i3nq","npcnawn-0apvx-qbofy-ms3t4p"]"
- room_id: (2) ["idf126-po0y5l-y19vjj-y2ud6o", "fantrl-x3hsdf-hfryfr-ixa9fb"]
- room_text: (2) ["34301", "34302"]
- start_time: "1553733000000"
- status: 0
- subject_id: "fqtktr-1lq5u"
- subject_text: "javaScript上"
- title: "测试2019.03.28"
- user_id: "w6l6n-cbvl6s"
- user_name: "chenmanjie"
-      *
-      */
+ 
 
         }
     }
