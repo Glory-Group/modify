@@ -132,10 +132,16 @@ export class AddQuestion extends React.Component<propsInfo> {
                 let params = {
                     exam_id, subject_id, questions_type_id, user_id, questions_answer, questions_stem, title: values.title
                 }
-                let result = await this.props.question.addQuestionsAction(params)
-                if (result.code === 1) {
-                    message.info(result.msg)
+                if (exam_id && subject_id && questions_type_id && user_id && questions_answer && questions_stem && values.title) {
+                    let result = await this.props.question.addQuestionsAction(params)
+                    if (result.code === 1) {
+                        message.info(result.msg)
+                    }
+                } else {
+
+                    message.error("请将页面填写完整")
                 }
+
             }
         });
     };
