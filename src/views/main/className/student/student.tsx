@@ -89,10 +89,10 @@ export class Student extends React.Component<propsInfo> {
                         return item.room_id === room_id
                     } else if (!student_name && !room_id && grade_id) {
                         return item.grade_id === grade_id
-                    }else{
-                        return []
+                    } else if (!student_name && !room_id && grade_id) {
+                        this.getStudentInfo()
                     }
-                    
+                    return []
                 })
                 this.setState({
                     newList: newArr
@@ -105,7 +105,7 @@ export class Student extends React.Component<propsInfo> {
         let result = await this.props.classType.delStudentAction(text.student_id)
         if (result.code === 1) {
             message.info(result.msg)
-            this.props.history.go(0)
+            this.getStudentInfo()
         }
 
     }
@@ -117,7 +117,8 @@ export class Student extends React.Component<propsInfo> {
             })
 
             this.setState({
-                studentList: result.data
+                studentList: result.data,
+                newList: result.data
             })
         }
     }
@@ -171,6 +172,11 @@ export class Student extends React.Component<propsInfo> {
             })
         }
     }
+    reset=()=>{
+        this.setState({
+
+        })
+    }
     public render() {
         const { getFieldDecorator } = this.props.form;
 
@@ -184,8 +190,6 @@ export class Student extends React.Component<propsInfo> {
                     <Form onSubmit={this.handleSubmit} className="login-form">
                         <Form.Item className="login-form-stem">
                             {getFieldDecorator('student_name', {
-                                // validateTrigger: "onBlur",
-                                // rules: [{ required: true, message: 'Please input student name!' }]
                             })(
                                 <Input
                                     placeholder="请输入学生姓名"
@@ -201,6 +205,9 @@ export class Student extends React.Component<propsInfo> {
                             <Button type="primary" htmlType="submit">
                                 搜索
                             </Button>
+                            <Button type="primary" onClick={this.reset} style={{marginLeft:"10px"}}>
+                                重置
+                            </Button>
                         </Form.Item>
 
                     </Form>
@@ -210,7 +217,7 @@ export class Student extends React.Component<propsInfo> {
 
                         </div>
                         <div>
-                            <Table columns={columns} dataSource={newList.length ? newList : studentList} />
+                            <Table columns={columns} dataSource={newList} />
                         </div>
                     </div>
                 </div>

@@ -23,3 +23,16 @@ export let getStudentInfo=()=>{
 export let delStudent=(params:any)=>{
     return request.delete(`/manger/student/${params}`)
 }
+//删除班级/manger/grade/delete
+export let delGrade=(params:any)=>{
+    console.log(params,"nnnnnnnnn")
+    return request.delete(`/manger/grade/delete`,params)
+}
+//更新班级
+export let updateGrade=(params:any)=>{
+    return request.put("/manger/grade/update",params)
+}
+//删除教室
+export let delRoom=(params:any)=>{
+    return request.delete(`/manger/room/delete/`,params)
+}

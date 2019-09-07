@@ -71,7 +71,7 @@ export class TypeQuestion extends React.Component<propsInfo> {
                 let result = await this.props.question.addTypeAction(param)
                 if (result.code === 1) {
                     message.info(result.msg);
-                    this.props.history.go(0)
+                   this.getList()
                     this.setState({                       
                         confirmLoading: true,
                       });
