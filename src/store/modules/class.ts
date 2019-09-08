@@ -43,7 +43,6 @@ class ClassType {
     //删除学生信息
     @action async delStudentAction(params: any) {
         let result: any = await delStudent(params)
-        console.log(result, "lllllllll")
         if (result.code === 1) {
             return result
         }
@@ -52,7 +51,6 @@ class ClassType {
     //删除班级
     @action async delGradeAction(params: any) {
         let result: any = await delGrade(params)
-        console.log(result, "lllllllll")
         if (result.code === 1) {
             return result
         }
@@ -61,7 +59,6 @@ class ClassType {
     //更新班级
     @action async updateGradeAction(params:any){
         let result: any = await updateGrade(params)
-        console.log(result, "qqqqqqqqqq")
         if (result.code === 1) {
             return result
         }
@@ -69,7 +66,6 @@ class ClassType {
     //删除教室
     @action async delRoomAction(params: any) {
         let result: any = await delRoom(params)
-        console.log(result, "rrrrrrrrrrrrrr")
         if (result.code === 1) {
             return result
         }

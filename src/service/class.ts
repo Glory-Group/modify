@@ -26,7 +26,7 @@ export let delStudent=(params:any)=>{
 //删除班级/manger/grade/delete
 export let delGrade=(params:any)=>{
     console.log(params,"nnnnnnnnn")
-    return request.delete(`/manger/grade/delete`,params)
+    return request.delete(`/manger/grade/delete`,{data:params})
 }
 //更新班级
 export let updateGrade=(params:any)=>{
@@ -34,5 +34,5 @@ export let updateGrade=(params:any)=>{
 }
 //删除教室
 export let delRoom=(params:any)=>{
-    return request.delete(`/manger/room/delete/`,params)
+    return request.delete(`/manger/room/delete/`,{data:params})
 }
