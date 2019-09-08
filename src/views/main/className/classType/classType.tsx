@@ -8,16 +8,9 @@ interface PropsInfo {
     history: any,
     question: any
 }
-
 const { Option } = Select
-
-
 @inject('classType', 'question')
 @observer
-
-
-
-
 export class ClassType extends React.Component<PropsInfo> {
     state = {
         gradeList: [],
@@ -25,10 +18,11 @@ export class ClassType extends React.Component<PropsInfo> {
         visible: false,
         confirmLoading: false,
         subjectList: [],
-        gradeName: "",
+        gradeName: "",//班级名
         type: "",
         grade_id: "",
-        classRoomList:[],
+        classRoomList: [],
+        isdisabled:true,
         columns: [
             {
                 title: "班级名",
@@ -52,17 +46,14 @@ export class ClassType extends React.Component<PropsInfo> {
                     <a onClick={() => { this.delGrade(text) }}>删除</a></span>),
             }
         ]
-
-
     }
     getList = async () => {
         let classGrade = await this.props.classType.getTabAction("/manger/grade")
         let subject = await this.props.question.getSubject()
         console.log(classGrade.data, "lllllllll")
-        let gradeArr: any = []
         if (classGrade.code === 1) {
             classGrade.data.map((item: any, index: number) => {
-                item.key = index              
+                item.key = index
             })
             this.setState({ gradeList: classGrade.data })
         }
@@ -70,50 +61,56 @@ export class ClassType extends React.Component<PropsInfo> {
             subject.data.map((item: any, index: number) => item.key = index)
             this.setState({ subjectList: subject.data })
         }
-
     }
+    //修改班级
     updateGrade = (text: any) => {
         console.log(text.grade_name, "pppppppp"),
             this.setState({
                 visible: true,
                 gradeName: text.grade_name,
                 type: "update",
-                grade_id: text.grade_id
+                grade_id: text.grade_id,
+                isdisabled:true
             });
-        //this.props.classType.updateGradeAction({grade_id:text.grade_id})
     }
-    getRoomList=async()=>{
-        let classRoom=await this.props.classType.getTabAction("/manger/room")
-        if(classRoom.code===1){
-            this.setState({classRoomList:classRoom.data})
+    getRoomList = async () => {
+        let classRoom = await this.props.classType.getTabAction("/manger/room")
+        if (classRoom.code === 1) {
+            this.setState({ classRoomList: classRoom.data })
         }
     }
-    delGrade = (text: any) => {
-        console.log(text.grade_id)
-        this.props.classType.delGradeAction({ grade_id: text.grade_id })
+    //删除班级
+    delGrade = async (text: any) => {
+        let result = await this.props.classType.delGradeAction({ grade_id: text.grade_id })
+        if (result.code === 1) {
+            message.info(result.msg)
+            this.getList()
+        }
     }
     showModal = () => {
         this.setState({
             visible: true,
-            type: "add"
+            type: "add",
+            isdisabled:false,
+            gradeName:"",
+            grade_id:""
         });
     };
-
     handleOk = (e: any) => {
         e.preventDefault();
-
         this.props.form.validateFields(async (err: any, values: any) => {
             if (!err) {
-                console.log(values)
+                //判断类型为update则为更新班级
                 if (this.state.type === "update") {
                     let { room_id, subject_id } = values
-
                     let result = await this.props.classType.updateGradeAction({ grade_id: this.state.grade_id, room_id, subject_id })
                     if (result.code === 1) {
                         message.info(result.msg);
                         this.getList()
                         this.setState({
                             confirmLoading: true,
+                            gradeName:"",
+                            grade_id:""
                         });
                         setTimeout(() => {
                             this.setState({
@@ -124,7 +121,8 @@ export class ClassType extends React.Component<PropsInfo> {
                     } else {
                         message.error(result.msg);
                     }
-                } else {
+                } else if (this.state.type === "add") {
+                    //类型为add为添加班级
                     let result = await this.props.classType.addListAction("/manger/grade", values)
                     if (result.code === 1) {
                         message.info(result.msg);
@@ -159,7 +157,7 @@ export class ClassType extends React.Component<PropsInfo> {
         this.getRoomList()
     }
     public render() {
-        let { gradeList, visible, confirmLoading, subjectList, columns, gradeName,classRoomList } = this.state
+        let { gradeList, visible, confirmLoading, subjectList, columns, gradeName, classRoomList,isdisabled } = this.state
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
@@ -187,7 +185,7 @@ export class ClassType extends React.Component<PropsInfo> {
                                 <Input
                                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder="班级名"
-
+                                    disabled={isdisabled}
                                 />
                             )}
                         </Form.Item>
@@ -202,7 +200,7 @@ export class ClassType extends React.Component<PropsInfo> {
                                 ],
                             })(<Select style={{ width: "100%" }} >
                                 {
-                                 classRoomList&& classRoomList.map((item: any, index: number) => {
+                                    classRoomList && classRoomList.map((item: any, index: number) => {
                                         return <Option value={item.room_id} key={index} >{item.room_text}</Option>
                                     })
                                 }

@@ -1,7 +1,6 @@
 import {observable, action} from 'mobx'
-import {loginInfo} from '../../service/index'
+import {loginInfo,getUserInfo} from '../../service/index'
 import {setToken,removeToken} from "../../util/saveToken"
-import {getUserInfo} from "../../service/login"
 let account={};
 
 if(window.localStorage.getItem('account')){
@@ -35,8 +34,7 @@ class Login{
         removeToken();
     }
      //获取用户信息
-   @action async getUserInfoAction(){
-      
+   @action async getUserInfoAction(){     
     let result = await getUserInfo()
     return result;
  }

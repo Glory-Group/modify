@@ -55,9 +55,12 @@ export class ClassRoom extends React.Component<PropsInfo> {
             visible: true,
         });
     };
-    delRoom = (text: any,record:any) => {
-        console.log(text.room_id)
-        this.props.classType.delRoomAction({room_id:text.room_id})
+    delRoom = async (text: any,record:any) => {
+        let result=await this.props.classType.delRoomAction({room_id:text.room_id})
+        if(result.code===1){
+            message.info(result.msg)
+            this.getList()
+        }
     }
     handleOk = (e: any) => {
         e.preventDefault();
