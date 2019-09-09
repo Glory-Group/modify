@@ -22,6 +22,7 @@ let student = Loadable({ loading: Loading, loader: () => import("../views/main/c
 let watingClass = Loadable({ loading: Loading, loader: () => import("../views/main/marking/watingClass/watingClass") })
 let addText = Loadable({ loading: Loading, loader: () => import("../views/main/text/addText/addText") })
 let listText = Loadable({ loading: Loading, loader: () => import("../views/main/text/listText/listText") })
+let createTextPaper = Loadable({ loading: Loading, loader: () => import("../views/main/text/createTextPaper/createTextPaper") })
 let addUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/addUser/addUser") })
 let showUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/showUser/showUser") })
 let showDetail = Loadable({ loading: Loading, loader: () => import("../views/main/question/showQuestion/detail/index") })
@@ -47,7 +48,7 @@ let routes = [
                     },
                     , {
                         component: showDetail,
-                        view_id:"main-questionsDetail99",
+                        view_id: "main-questionsDetail99",
                         path: "/main/question/detail/:id"
                     },
                     {
@@ -86,7 +87,7 @@ let routes = [
                 path: "/main/user"
 
             },
-            
+
             {
                 "title": "考试管理",
                 "type": "schedule",
@@ -100,11 +101,14 @@ let routes = [
                     "id": 7,
                     component: listText,
                     path: "/main/text/listText"
+                }, {
+                    component: createTextPaper,
+                    path: "/main/text/createTextPaper"
                 }],
                 component: text,
                 path: "/main/text"
 
-            },{
+            }, {
                 "title": "班级管理",
                 "type": "project",
                 children: [{
@@ -127,9 +131,9 @@ let routes = [
                 component: className,
                 path: "/main/className"
 
-            },  {
+            }, {
                 "title": "阅卷管理",
-                "type":"project",
+                "type": "project",
                 children: [{
                     "title": "待批班级",
                     "id": 11,
@@ -147,17 +151,17 @@ let routes = [
         component: main,
         path: "/main"
     }, {
-        path:"/403",
-        component:()=><div>403</div>
-    },{
-        path:"/404",
-        component:()=><div>404</div>
-    },{
+        path: "/403",
+        component: () => <div>403</div>
+    }, {
+        path: "/404",
+        component: () => <div>404</div>
+    }, {
         from: "/",
         to: "/login"
-    },{
-        from:"*",
-        to:"/404"
+    }, {
+        from: "*",
+        to: "/404"
     }
 ]
 export default routes

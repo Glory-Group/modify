@@ -2,11 +2,13 @@ import * as React from 'react'
 import { Form, Input, Cascader, InputNumber, Button, DatePicker } from 'antd';
 import { observer, inject } from "mobx-react";
 import moment from "moment"
+
 const { RangePicker } = DatePicker;
 interface propsInfo {
     form: any,
     question: any,
-    text:any
+    text:any,
+    history:any
 
 }
 @inject("question", "login","text")
@@ -40,9 +42,11 @@ export class AddText extends React.Component<propsInfo> {
                 let params={
                     subject_id,exam_id,title,number,start_time,end_time
                 }
-                this.props.text.createTextAction(params)
-                // console.log(exam_id,subject_id,number,startValue,endValue)
-                // console.log(values, "values")
+                let result=await this.props.text.createTextAction(params)
+                if(result.code===1){
+                    this.props.history.push("/main/text/createTextPaper")
+                }
+                //console.log(result)
 
             }
         });

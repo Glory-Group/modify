@@ -1,8 +1,8 @@
 import {observable, action} from 'mobx'
-import {loginInfo,getUserInfo} from '../../service/index'
+import {loginInfo,getUserInfo} from '@/service/index'
 import {setToken,removeToken} from "../../util/saveToken"
 let account={};
-
+//若本地存储中存在‘account’ 则将account赋值
 if(window.localStorage.getItem('account')){
     account=JSON.parse(window.localStorage.getItem('account')+'');
 }
