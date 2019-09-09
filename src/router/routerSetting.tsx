@@ -24,8 +24,8 @@ let addText = Loadable({ loading: Loading, loader: () => import("../views/main/t
 let listText = Loadable({ loading: Loading, loader: () => import("../views/main/text/listText/listText") })
 let addUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/addUser/addUser") })
 let showUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/showUser/showUser") })
-let showDetail=Loadable({loading:Loading,loader:()=>import("../views/main/question/showQuestion/detail/index")})
-let classMate=Loadable({loading:Loading,loader:()=>import("../views/main/marking/classMate/index")})
+let showDetail = Loadable({ loading: Loading, loader: () => import("../views/main/question/showQuestion/detail/index") })
+let classMate = Loadable({ loading: Loading, loader: () => import("../views/main/marking/classMate/index") })
 let routes = [
     {
         component: login,
@@ -35,46 +35,32 @@ let routes = [
     {
         children: [
             {
-                children:[{
-                    component:classRoom,
-                    path:"/main/className/classRoom"
-                },
-                {
-                    component:classType,
-                    path:"/main/className/classType"
-                },{
-                    component:student,
-                    path:"/main/className/student"
-                }],
-                component: className,
-                path: "/main/className"
-
-            }, {
-                children:[{
-                    component:watingClass,
-                    path:"/main/marking/watingClass"
-                },{
-                    component:classMate,
-                    path:"/main/marking/classMate/:id"
-                }],
-                component: marking,
-                path: "/main/marking"
-
-            }, {
+                "title": "试题管理",
+                "type": "sliders",
                 children: [
                     {
+                        "title": "添加试题",
+                        "id": 1,
                         component: addQuestion,
+                        view_id: "main-addQuestions9999",
                         path: "/main/question/addQuestion"
                     },
-                    ,{
-                        component:showDetail,
-                        path:"/main/question/detail/:id"
+                    , {
+                        component: showDetail,
+                        view_id:"main-questionsDetail99",
+                        path: "/main/question/detail/:id"
                     },
                     {
+                        "title": "查看试题",
+                        "id": 3,
                         component: showQuestion,
+                        view_id: "main-watchQuestions9999",
                         path: "/main/question/showQuestion"
                     }, {
+                        "title": "试题分类",
+                        "id": 2,
                         component: typeQuestion,
+                        view_id: "main-questionsType",
                         path: "/main/question/typeQuestion"
                     }
                 ],
@@ -83,37 +69,95 @@ let routes = [
 
             },
             {
-                children:[{
-                    component:addText,
-                    path:"/main/text/addText"
-                },{
-                    component:listText,
-                    path:"/main/text/listText"
-                }],
-                component: text,
-                path: "/main/text"
-
-            }, {
-                children:[{
-                    component:addUser,
-                    path:"/main/user/addUser"
-                },{
-                    component:showUser,
-                    path:"/main/user/showUser"
+                "title": "用户管理",
+                "type": "team",
+                children: [{
+                    "title": "添加用户",
+                    "id": 4,
+                    component: addUser,
+                    path: "/main/user/addUser"
+                }, {
+                    "title": "用户展示",
+                    "id": 5,
+                    component: showUser,
+                    path: "/main/user/showUser"
                 }],
                 component: user,
                 path: "/main/user"
 
-            }, {
-                from: "/main",
-                to: "/main/question"
+            },
+            
+            {
+                "title": "考试管理",
+                "type": "schedule",
+                children: [{
+                    "title": "添加考试",
+                    "id": 6,
+                    component: addText,
+                    path: "/main/text/addText"
+                }, {
+                    "title": "试卷列表",
+                    "id": 7,
+                    component: listText,
+                    path: "/main/text/listText"
+                }],
+                component: text,
+                path: "/main/text"
+
+            },{
+                "title": "班级管理",
+                "type": "project",
+                children: [{
+                    "title": "教室管理",
+                    "id": 9,
+                    component: classRoom,
+                    path: "/main/className/classRoom"
+                },
+                {
+                    "title": "班级管理",
+                    "id": 8,
+                    component: classType,
+                    path: "/main/className/classType"
+                }, {
+                    "title": "学生管理",
+                    "id": 10,
+                    component: student,
+                    path: "/main/className/student"
+                }],
+                component: className,
+                path: "/main/className"
+
+            },  {
+                "title": "阅卷管理",
+                "type":"project",
+                children: [{
+                    "title": "待批班级",
+                    "id": 11,
+                    component: watingClass,
+                    path: "/main/marking/watingClass"
+                }, {
+                    component: classMate,
+                    path: "/main/marking/classMate/:id"
+                }],
+                component: marking,
+                path: "/main/marking"
+
             }
         ],
         component: main,
         path: "/main"
-    },  {
+    }, {
+        path:"/403",
+        component:()=><div>403</div>
+    },{
+        path:"/404",
+        component:()=><div>404</div>
+    },{
         from: "/",
         to: "/login"
+    },{
+        from:"*",
+        to:"/404"
     }
 ]
 export default routes

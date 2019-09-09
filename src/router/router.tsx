@@ -1,16 +1,22 @@
-import React, { Component } from "react"
-import {BrowserRouter} from "react-router-dom"
+import * as React from "react"
 import RouterView from "./routerview"
 import routes from "./routerSetting"
-class RoutesView extends Component {
+import store from "../store/index"
+import {filterView} from "../util/permission"
+const myRoutes = filterView(routes,store.user.viewAuthority);
 
-    render() {
-        return <BrowserRouter>
-               <RouterView routes={routes}></RouterView>
-        </BrowserRouter>
+
+interface PropsInfo{
+    routes:Array<object>
+}
+
+class RoutesView extends React.Component<PropsInfo> {
+
+  public render() {
+        let {routes}=this.props
+        return (
+            <RouterView routes={routes}></RouterView>
+        )
     }
-
-
-
 }
 export default RoutesView

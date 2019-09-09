@@ -14,7 +14,7 @@ const RouterView = (props: PropsInfo) => {
                 return item.children && item.children.length ? <item.component {...props}>
                     <RouterView routes={item.children} />
                 </item.component> : <item.component {...props}></item.component>
-            }}></Route> : <Redirect key={item.from} {...item}></Redirect>
+            }}></Route> : <Redirect key={item.from} exact from={item.from} to={item.to}></Redirect>
         })}
     </Switch>
 }

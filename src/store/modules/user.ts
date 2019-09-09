@@ -1,8 +1,11 @@
 import {observable, action} from 'mobx'
 
-import {getTabList,addList,addUserType,setUserType} from "../../service/user"
+import {getTabList,addList,addUserType,setUserType,getUserIn,getViewAuthority} from "../../service/user"
 class User{
-  
+     
+   @observable userInfo:any={};
+   @observable viewAuthority:object[]=[];
+
    @action async getTabAction(url:string){
     let result:any=await getTabList(url)
     if(result.code===1){
@@ -27,6 +30,22 @@ class User{
     let result:any=await setUserType(url,params)
     return result
   }
+
+  @action async getUserInfo():Promise<any>{
+    let userInfo:any = await getUserIn()
+
+    this.userInfo=userInfo.data
+    this.getViewAuthority()
+   
+   
+  }
+
+  @action async getViewAuthority():Promise<any>{
+    let viewAuthority:any=await getViewAuthority();
+    console.log(viewAuthority.data)
+    this.viewAuthority=viewAuthority.data;
+  }
+
 }
 export default User;
 

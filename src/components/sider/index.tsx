@@ -1,9 +1,24 @@
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
 import * as React from "react"
+//引入用户路由
+import routes from "../../router/routerSetting"
+import {filterView} from "../../util/permission"
+
+
 import {NavLink} from "react-router-dom"
+import {observer,inject} from "mobx-react"
+
 const { Sider } = Layout
 const { SubMenu } = Menu;
-class Siders extends React.Component {
+
+interface PropsInfo{
+  user?:any
+}
+
+@inject("user")
+@observer
+
+class Siders extends React.Component<PropsInfo> {
   state = {
     collapsed: false,
     navList: [
@@ -97,15 +112,20 @@ class Siders extends React.Component {
     super(props)
   }
   public onCollapse = (collapsed: any) => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
   render() {
     let { navList } = this.state
+    //用户权限
+    let {viewAuthority} = this.props.user;
+
+    let myRoutes:any = filterView(routes,viewAuthority)
+    //console.log(viewAuthority,myRoutes)
+    myRoutes = myRoutes.find((item:any)=>item.children).children
     return <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{height:"100%",position:"fixed",top:"64px"}}>
       <div className="logo">
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          {navList.map((item: any, index: number) =>
+        {myRoutes.map((item: any, index: number) =>
             <SubMenu
               key={item.title}
               title={
