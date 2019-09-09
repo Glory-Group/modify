@@ -22,6 +22,7 @@ let student = Loadable({ loading: Loading, loader: () => import("../views/main/c
 let watingClass = Loadable({ loading: Loading, loader: () => import("../views/main/marking/watingClass/watingClass") })
 let addText = Loadable({ loading: Loading, loader: () => import("../views/main/text/addText/addText") })
 let listText = Loadable({ loading: Loading, loader: () => import("../views/main/text/listText/listText") })
+let createTextPaper=Loadable({loading:Loading,loader:()=>import("../views/main/text/createTextPaper/createTextPaper")})
 let addUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/addUser/addUser") })
 let showUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/showUser/showUser") })
 let showDetail=Loadable({loading:Loading,loader:()=>import("../views/main/question/showQuestion/detail/index")})
@@ -89,6 +90,9 @@ let routes = [
                 },{
                     component:listText,
                     path:"/main/text/listText"
+                },{
+                    component:createTextPaper,
+                    path:"/main/text/createTextPaper"
                 }],
                 component: text,
                 path: "/main/text"

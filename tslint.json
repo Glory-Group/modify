@@ -21,6 +21,7 @@
     "jsx-self-close":false,
     "jsx-no-lambda":false,
     "object-literal-sort-keys":false,
-    "member-access":false
+    "member-access":false,
+    "no-implicit-dependencies": ["optional", ["src"]]
   }
 }
