@@ -6,6 +6,7 @@ import store from './store'
 import {Provider} from 'mobx-react';
 
 
+
 ReactDOM.render(
   <Provider {...store}>
     <App />
