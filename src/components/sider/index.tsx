@@ -1,5 +1,6 @@
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import { Layout, Menu, Icon } from "antd";
 import * as React from "react"
+
 //引入用户路由
 import routes from "../../router/routerSetting"
 import { filterView } from "../../util/permission"
@@ -36,7 +37,6 @@ class Siders extends React.Component<PropsInfo> {
     let { viewAuthority } = this.props.user;
     let {formatMessage} = this.props.intl;
     let myRoutes: any = filterView(routes, viewAuthority)
-    //console.log(viewAuthority,myRoutes)
     myRoutes = myRoutes.find((item: any) => item.children).children
     return <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{ height: "100%", position: "fixed", top: "64px" }}>
       <div className="logo">
@@ -55,14 +55,9 @@ class Siders extends React.Component<PropsInfo> {
                 sub.title && <Menu.Item key={sub.id} >
                   <NavLink to={sub.path}>{sub.title?formatMessage({id:sub.title}):sub.path}</NavLink>
                 </Menu.Item>
-
-
               )}
             </SubMenu>
-
-
           )}
-
         </Menu>
       </div>
     </Sider>

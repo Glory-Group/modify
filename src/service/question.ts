@@ -40,7 +40,11 @@ export let getExamType=()=>{
 export let addQuestions=(params:any)=>{
     return request.post("/exam/questions",params)
 }
-
+//更新试题接口
+export let updateQuestion=(params:any)=>{
+    console.log(params)
+    return request.put("/exam/questions/update",params)
+}
 
 
 

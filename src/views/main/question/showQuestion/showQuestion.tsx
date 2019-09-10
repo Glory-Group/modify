@@ -191,7 +191,9 @@ export class ShowQuestion extends React.Component<Props> {
                       <div style={{ color: "#0139fd" }}>{item.user_name}发布</div>
                     </div>
                     <div className="right">
-                      <a style={{ color: "#0139fd" }}>编辑</a>
+                      <span style={{ color: "#0139fd" }} onClick={()=>{
+                        this.props.history.push("/main/question/editQuestion/"+item.questions_id)
+                      }} >编辑</span>
                     </div>
                   </div>
                 })

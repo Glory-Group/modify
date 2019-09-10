@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import { getQuestion, getSubject, examType, getQuestionType, getCondition, addType, addQuestions } from '../../service/index'
+import { getQuestion, getSubject, examType, getQuestionType, getCondition, addType, addQuestions,updateQuestion } from '../../service/index'
 
 class Question {
     @observable dataList: object = {};
@@ -69,6 +69,12 @@ class Question {
     //添加试题接口
     @action async addQuestionsAction(params:any){
         let result=await addQuestions(params)
+        return result
+    }
+
+    //更新试题
+    @action async updateQuestionAction(params:any){
+        let result = await updateQuestion(params)
         return result
     }
 

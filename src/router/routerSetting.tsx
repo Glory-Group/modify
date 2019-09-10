@@ -27,6 +27,7 @@ let addUser = Loadable({ loading: Loading, loader: () => import("../views/main/u
 let showUser = Loadable({ loading: Loading, loader: () => import("../views/main/user/showUser/showUser") })
 let showDetail = Loadable({ loading: Loading, loader: () => import("../views/main/question/showQuestion/detail/index") })
 let classMate = Loadable({ loading: Loading, loader: () => import("../views/main/marking/classMate/index") })
+let editQuestion =Loadable({loading:Loading,loader:()=>import("../views/main/question/showQuestion/editQuestion/index")})
 let routes = [
     {
         component: login,
@@ -48,14 +49,18 @@ let routes = [
                     },
                     {
                         component: showDetail,
-                        view_id: "main-questionsDetail99",
+                        view_id: "main-questionsDetail",
                         path: "/main/question/detail/:id"
+                    },{
+                        component:editQuestion,
+                        view_id:'',
+                        path:"/main/question/editQuestion/:id"
                     },
                     {
                         "title": "menu.question.viewQuestion",
                         "id": 3,
                         component: showQuestion,
-                        view_id: "main-watchQuestions9999",
+                        view_id: "main-watchQuestions",
                         path: "/main/question/showQuestion"
                     }, {
                         "title": "menu.question.typeQuestion",
