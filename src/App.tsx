@@ -3,19 +3,18 @@ import * as React from 'react';
 
 //引入配置路由
 import RoutesView from "./router/router"
-import {createBrowserHistory} from "history"
-import {Router} from "react-router"
+import { createBrowserHistory } from "history"
+import { Router } from "react-router"
 import routes from "./router/routerSetting"
-
+import { inject, observer } from 'mobx-react'
 
 //引入andt样式
-import 'antd/dist/antd.css';
-import { observer, inject } from "mobx-react"
+import 'antd/dist/antd.css'
 
 //引入导航守卫
 import guardInit, { filterView } from "./util/permission"
 // 引入国际化
-import {IntlProvider} from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import zhCN from './language/zh-CN';
 import enUS from './language/en-US';
 import { Interface } from 'readline';
@@ -27,9 +26,9 @@ const localeMap = {
 //创建一个browser router
 const history = createBrowserHistory()
 guardInit(history)
-interface propsInfo{
-  user?:any,
-  global?:any,message:any,local:any
+interface propsInfo {
+  user?: any,
+  global?: any, message: any, local: any
 }
 
 @inject("user", "global")
