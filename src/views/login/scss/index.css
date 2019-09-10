@@ -4,6 +4,11 @@
   bottom: 0;
   width: 100%;
   background-size: auto 100%;
+  background-color: navy;
+}
+
+.ant-layout-header {
+  padding: 0;
 }
 
 .ant-layout-header {

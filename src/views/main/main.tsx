@@ -5,25 +5,28 @@ import Head from "../../components/header/header"
 import Slider from "../../components/sider/index"
 import ContentForm from "../../components/content/index"
 import RouterView from "../../router/routerview"
-const { Content, Footer, Header, Sider } = Layout;
+import {observer, inject} from 'mobx-react';
+import "./scss/style.css"
 
-const { SubMenu } = Menu;
 
- export class SiderDemo extends React.Component {
+interface Props{
+  question: any,
+}
+
+@inject('question')
+@observer
+ export class SiderDemo extends React.Component<Props> {
   public state = {
     collapsed: false,
   };
-
-
 
   public render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Head></Head>
-        <Layout>
+        <Layout style={{height:"100%"}}>
           <Slider></Slider>
           <ContentForm>
-            {/* <RouterView routes={this.props['routes']} /> */}
           {this.props.children}
           </ContentForm>
 

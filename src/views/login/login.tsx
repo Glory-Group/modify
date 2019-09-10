@@ -2,18 +2,14 @@ import * as React from 'react'
 import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import {WrappedFormUtils} from 'antd/lib/form/Form'
 import {inject, observer} from 'mobx-react'
-import "../../assets/login/index.css"
-
+import "./scss/index.css"
 interface PropsInfo{
     history:any,
     form:WrappedFormUtils,
     login:any
 }
-
-
 @inject('login')
 @observer
-
 export class Login extends React.Component<PropsInfo> {
     handleSubmit = (e:any) => {
         e.preventDefault();
@@ -32,6 +28,7 @@ export class Login extends React.Component<PropsInfo> {
     
    public  render() {
         const { getFieldDecorator } = this.props.form;
+        //从仓库中取user_name,user_pwd的值 并赋值给input的默认值
         const {user_name,user_pwd} =this.props.login.account;
         return (
         <div className='login-wrapper'>          
@@ -39,6 +36,7 @@ export class Login extends React.Component<PropsInfo> {
             <Form.Item>
               {getFieldDecorator('user_name', {
                    validateTrigger: 'onBlur',
+                   //给user_name设置默认值为本地存储中的user_name
                    initialValue: user_name,
                 rules: [{ validator: (ruler, value, callback)=>{
                   console.log('value...', value);
