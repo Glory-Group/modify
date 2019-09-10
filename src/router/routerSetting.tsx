@@ -36,29 +36,29 @@ let routes = [
     {
         children: [
             {
-                "title": "试题管理",
+                "title": "menu.question",
                 "type": "sliders",
                 children: [
                     {
-                        "title": "添加试题",
+                        "title": "menu.question.addQuestion",
                         "id": 1,
                         component: addQuestion,
                         view_id: "main-addQuestions9999",
                         path: "/main/question/addQuestion"
                     },
-                    , {
+                    {
                         component: showDetail,
                         view_id: "main-questionsDetail99",
                         path: "/main/question/detail/:id"
                     },
                     {
-                        "title": "查看试题",
+                        "title": "menu.question.viewQuestion",
                         "id": 3,
                         component: showQuestion,
                         view_id: "main-watchQuestions9999",
                         path: "/main/question/showQuestion"
                     }, {
-                        "title": "试题分类",
+                        "title": "menu.question.typeQuestion",
                         "id": 2,
                         component: typeQuestion,
                         view_id: "main-questionsType",
@@ -70,15 +70,15 @@ let routes = [
 
             },
             {
-                "title": "用户管理",
+                "title": "menu.user",
                 "type": "team",
                 children: [{
-                    "title": "添加用户",
+                    "title": "menu.user.addUser",
                     "id": 4,
                     component: addUser,
                     path: "/main/user/addUser"
                 }, {
-                    "title": "用户展示",
+                    "title": "menu.user.showUser",
                     "id": 5,
                     component: showUser,
                     path: "/main/user/showUser"
@@ -89,15 +89,17 @@ let routes = [
             },
 
             {
-                "title": "考试管理",
+                "title": "menu.exam",
                 "type": "schedule",
+                component: text,
+                path: "/main/text",
                 children: [{
-                    "title": "添加考试",
+                    "title": "menu.exam.addExam",
                     "id": 6,
                     component: addText,
                     path: "/main/text/addText"
                 }, {
-                    "title": "试卷列表",
+                    "menu.exam.examList": "试卷列表",
                     "id": 7,
                     component: listText,
                     path: "/main/text/listText"
@@ -105,25 +107,24 @@ let routes = [
                     component: createTextPaper,
                     path: "/main/text/createTextPaper"
                 }],
-                component: text,
-                path: "/main/text"
+
 
             }, {
-                "title": "班级管理",
+                "title": "menu.class",
                 "type": "project",
                 children: [{
-                    "title": "教室管理",
+                    "title": "menu.class.room",
                     "id": 9,
                     component: classRoom,
                     path: "/main/className/classRoom"
                 },
                 {
-                    "title": "班级管理",
+                    "title": "menu.class.grade",
                     "id": 8,
                     component: classType,
                     path: "/main/className/classType"
                 }, {
-                    "title": "学生管理",
+                    "title": "menu.class.student",
                     "id": 10,
                     component: student,
                     path: "/main/className/student"
@@ -132,10 +133,10 @@ let routes = [
                 path: "/main/className"
 
             }, {
-                "title": "阅卷管理",
+                "title": "menu.marking",
                 "type": "project",
                 children: [{
-                    "title": "待批班级",
+                    "title": "menu.marking.wait",
                     "id": 11,
                     component: watingClass,
                     path: "/main/marking/watingClass"

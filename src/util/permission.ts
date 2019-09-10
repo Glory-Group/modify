@@ -18,7 +18,6 @@ function  beforeEach (history:any){
         history.replace("/login")
     }
 }
-
 export function filterView(originRoutes:object[],viewAutority:object[]): object[]{
    const forbiddenView:object[]=[];
    function func(originRoutes:object[],viewAutority:object[]):object[]{
@@ -27,10 +26,8 @@ export function filterView(originRoutes:object[],viewAutority:object[]): object[
          if(item.children){
              item.children=func(item.children,viewAutority)
          }
-
          if(item.view_id){
              if(viewAutority.findIndex((value:any)=>value.view_id===item.view_id)!==-1){
-                 console.log(item)
                  routes.push(item)
              }else{
                  forbiddenView.push({from:item.path,to:"/403"});
@@ -44,5 +41,4 @@ export function filterView(originRoutes:object[],viewAutority:object[]): object[
    let routes=func(originRoutes,viewAutority);
    return forbiddenView.concat(routes)
 }
-
 export default guard;

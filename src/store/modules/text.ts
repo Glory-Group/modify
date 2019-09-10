@@ -7,7 +7,6 @@ class Text {
     @observable exam_exam_id:any=""
     @action async createTextAction(params: any) {
         let result: any = await createText(params)
-        console.log(result,"nknknk")
         if (result.code === 1) {          
             this.questions=result.data.questions
             this.exam_exam_id=result.data.exam_exam_id
@@ -24,7 +23,6 @@ class Text {
     @action async createPaperAction(params:any){
         let id=this.exam_exam_id
         let result:any=await createPaper(params,id)
-        // console.log(result)
         return result
     }
 }

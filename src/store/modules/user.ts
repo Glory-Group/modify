@@ -33,7 +33,6 @@ class User{
 
   @action async getUserInfo():Promise<any>{
     let userInfo:any = await getUserIn()
-
     this.userInfo=userInfo.data
     this.getViewAuthority()
    
@@ -42,7 +41,6 @@ class User{
 
   @action async getViewAuthority():Promise<any>{
     let viewAuthority:any=await getViewAuthority();
-    console.log(viewAuthority.data)
     this.viewAuthority=viewAuthority.data;
   }
 

@@ -5,8 +5,17 @@ import Head from "../../components/header/header"
 import Slider from "../../components/sider/index"
 import ContentForm from "../../components/content/index"
 import RouterView from "../../router/routerview"
+import {observer, inject} from 'mobx-react';
 import "./scss/style.css"
- export class SiderDemo extends React.Component {
+
+
+interface Props{
+  question: any,
+}
+
+@inject('question')
+@observer
+ export class SiderDemo extends React.Component<Props> {
   public state = {
     collapsed: false,
   };
