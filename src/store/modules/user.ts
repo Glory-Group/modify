@@ -36,12 +36,14 @@ class User{
   @action async getUserInfo():Promise<any>{
     let userInfo:any = await getUserIn()
     this.userInfo=userInfo.data
+    // console.log(userInfo,"kkkkkkkkkkkkk")
     this.getViewAuthority()
   }
 
   //获取用户权限
   @action async getViewAuthority():Promise<any>{
     let viewAuthority:any=await getViewAuthority();
+    // console.log(viewAuthority,"llllllllllllll")
     this.viewAuthority=viewAuthority.data;
   }
 

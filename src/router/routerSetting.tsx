@@ -99,7 +99,7 @@ let routes = [
                     component: addText,
                     path: "/main/text/addText"
                 }, {
-                    "menu.exam.examList": "试卷列表",
+                    "title": "menu.exam.examList",
                     "id": 7,
                     component: listText,
                     path: "/main/text/listText"

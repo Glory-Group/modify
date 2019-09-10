@@ -30,6 +30,7 @@ export class AddText extends React.Component<propsInfo> {
         this.getSubject()
 
     }
+    //点击创建试卷
     handleSubmit = (e: any) => {
         e.preventDefault();
         this.props.form.validateFields(async (err: Error, values: any) => {
@@ -46,11 +47,10 @@ export class AddText extends React.Component<propsInfo> {
                 if(result.code===1){
                     this.props.history.push("/main/text/createTextPaper")
                 }
-                //console.log(result)
-
             }
         });
     };
+    //获取所有考试类型
     getExamType = async () => {
         let result = await this.props.question.getType()
         if (result.code === 1) {
@@ -69,6 +69,7 @@ export class AddText extends React.Component<propsInfo> {
             exam_id: item[0].id
         })
     }
+    //获取所有课程
     getSubject = async () => {
         let result = await this.props.question.getSubject()
         if (result.code === 1) {
@@ -175,8 +176,6 @@ export class AddText extends React.Component<propsInfo> {
                         <Form.Item>
                             <span>考试时间</span>
                             <div>
-                                {/* <DatePicker showTime placeholder="开始时间" onChange={this.onChangeStartDate} onOk={this.onOk} />
-                                <DatePicker showTime placeholder="结束时间" onChange={this.onChangeStartDate} onOk={this.onOk} /> */}
                                 <div>
                                     <DatePicker
                                         disabledDate={this.disabledStartDate}
