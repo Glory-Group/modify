@@ -17,7 +17,7 @@ import guardInit, { filterView } from "./util/permission"
 import { IntlProvider } from 'react-intl';
 import zhCN from './language/zh-CN';
 import enUS from './language/en-US';
-import { Interface } from 'readline';
+
 const localeMap = {
   en: enUS,
   zh: zhCN
@@ -28,14 +28,14 @@ const history = createBrowserHistory()
 guardInit(history)
 interface propsInfo {
   user?: any,
-  global?: any, message: any, local: any
+  global?: any
 }
 
 @inject("user", "global")
 @observer
 
 
-class App extends React.Component<any> {
+class App extends React.Component<propsInfo> {
   public render() {
     const myRoutes = filterView(routes, this.props.user.viewAuthority);
     return (<IntlProvider locale={this.props.global.locale} messages={localeMap[this.props.global.locale]}>
@@ -46,5 +46,5 @@ class App extends React.Component<any> {
     );
   }
 }
-// children: Element; locale: any; message: any;
+
 export default App;
