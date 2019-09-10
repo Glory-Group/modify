@@ -6,11 +6,11 @@ import RoutesView from "./router/router"
 import { createBrowserHistory } from "history"
 import { Router } from "react-router"
 import routes from "./router/routerSetting"
-
+import { inject, observer } from 'mobx-react'
 
 //引入andt样式
 import 'antd/dist/antd.css';
-import { observer, inject } from "mobx-react"
+
 
 //引入导航守卫
 import guardInit, { filterView } from "./util/permission"
