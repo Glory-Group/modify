@@ -62,12 +62,13 @@ class CreateTextePaper extends React.Component<propsInfo>{
         {
           this.props.text.questions && this.props.text.questions.length && this.props.text.questions.map((item: any, index: number) =>
             <div key={index} className="question-content" style={{ padding: "10px" }}>
-              {item.title}
-              {item.questions_stem}
               <div>
-                <Button type="primary" onClick={this.delQuestion}>
+                <div style={{position:"relative"}}>
+                <Button onClick={this.delQuestion} style={{position:"absolute",right:"10px",top:"5px"}}>
                   删除
                 </Button>
+                </div>
+                
                 <Modal
                   title="确认提示"
                   visible={this.state.visible}
@@ -78,6 +79,12 @@ class CreateTextePaper extends React.Component<propsInfo>{
 
                 </Modal>
               </div>
+              <div style={{position:"absolute",top:"44px"}}>
+              {item.title}
+              {item.questions_stem}
+              </div>
+             
+
             </div>
           )
         }

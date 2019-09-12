@@ -27,3 +27,7 @@ export let getUserIn=()=>{
 export let getViewAuthority=()=>{
   return request.get("/user/view_authority")
 }
+//展示身份和视图权限关系/user/identity_view_authority_relation
+export let getIdentityView=()=>{
+  return request.get("/user/identity_view_authority_relation")
+}

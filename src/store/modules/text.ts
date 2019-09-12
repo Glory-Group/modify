@@ -25,5 +25,6 @@ class Text {
         let result:any=await createPaper(params,id)
         return result
     }
+  
 }
 export default Text

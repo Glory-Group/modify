@@ -34,13 +34,14 @@ export class AddQuestion extends React.Component<propsInfo> {
     this.getSubject()
     this.getQuestionsType()
     this.getUserInfo()
+    //this.getdefaultQuestion()
   }
   componentDidMount() {
-    this.getdefaultQuestion()
+    //this.getdefaultQuestion()
   }
   getdefaultQuestion = () => {
     let data: any = window.localStorage.getItem("questionDetail")
-    let defaultQuestion = JSON.parse(data)[0]
+    let defaultQuestion = data&&JSON.parse(data).length&&JSON.parse(data)[0]
     let { title, exam_name, subject_text, questions_type_text, questions_stem, questions_answer } = defaultQuestion
     this.setState({
       title: title, exam_name: exam_name, subject_text: subject_text, questions_type_text: questions_type_text, questions_stem: questions_stem, questions_answer: questions_answer
