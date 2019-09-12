@@ -7,4 +7,19 @@
   position: fixed;
   top: 0;
   z-index: 9;
+  display: flex;
+}
+
+.header .header-msg {
+  position: absolute;
+  right: 100px;
+  border: 1px solid #fff;
+}
+
+.header .header-msg .ant-dropdown-trigger {
+  height: 64px;
+  display: flex;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
 }

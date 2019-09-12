@@ -1,10 +1,11 @@
 import {observable, action} from 'mobx'
 
-import {getTabList,addList,addUserType,setUserType,getUserIn,getViewAuthority} from "../../service/user"
+import {getTabList,addList,addUserType,setUserType,getUserIn,getViewAuthority,updateUserInfo} from "../../service/user"
 class User{
      
    @observable userInfo:any={};
    @observable viewAuthority:object[]=[];
+   @observable avatar:string='';
 
    @action async getTabAction(url:string){
     let result:any=await getTabList(url)
@@ -36,6 +37,7 @@ class User{
   @action async getUserInfo():Promise<any>{
     let userInfo:any = await getUserIn()
     this.userInfo=userInfo.data
+    this.avatar = userInfo.data.avatar;
     // console.log(userInfo,"kkkkkkkkkkkkk")
     this.getViewAuthority()
   }
@@ -46,7 +48,16 @@ class User{
     // console.log(viewAuthority,"llllllllllllll")
     this.viewAuthority=viewAuthority.data;
   }
+  //更改用户信息 
+  @action async changeAvatar(avatar:string):Promise<any>{
+      this.avatar=avatar
+  }
+  //更新用户信息
+  @action async updateUserInfoAction(params:any):Promise<any>{
+    let result=await updateUserInfo(params)
 
+    return result
+  }
 }
 export default User;
 

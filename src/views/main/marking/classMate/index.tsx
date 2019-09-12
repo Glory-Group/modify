@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Form, Input, Cascader, InputNumber, Button, DatePicker,Table } from 'antd';
 import { observer, inject } from "mobx-react";
+import "./scss/listText.css"
 interface propsInfo {
     form: any,
     mark:any,
@@ -101,7 +102,7 @@ export class ClassMate extends React.Component<propsInfo> {
     }
     getClassMateList = async () => {
         let {id}=this.props.match.params
-        let result = await this.props.mark.getMarkListAction("/exame/exam")
+        let result = await this.props.mark.getMarkListAction("/exame/student",{grade_id:id})
         console.log(result)
         if(result.code===1){
             result.data.map((item:any,index:number)=>item.key=index)

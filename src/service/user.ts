@@ -27,3 +27,7 @@ export let getUserIn=()=>{
 export let getViewAuthority=()=>{
   return request.get("/user/view_authority")
 }
+//更改用户信息
+export let updateUserInfo=(params:any)=>{
+  return request.put("/user/user",params)
+}
