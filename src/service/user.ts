@@ -31,3 +31,7 @@ export let getViewAuthority=()=>{
 export let updateUserInfo=(params:any)=>{
   return request.put("/user/user",params)
 }
+//展示身份和视图权限关系/user/identity_view_authority_relation
+export let getIdentityView=()=>{
+  return request.get("/user/identity_view_authority_relation")
+}
