@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx'
 
-import { getTabList, addList, addUserType, setUserType, getUserIn, getViewAuthority,updateUserInfo, getIdentityView } from "../../service/user"
+import { getTabList, addList, addUserType, setUserType, getUserIn, getViewAuthority,updateUserInfo, getIdentityView ,getUserList} from "../../service/user"
 class User {
 
   @observable userInfo: any = {};
@@ -46,17 +46,7 @@ class User {
     this.getIdentityViewAction()
     this.getViewAuthority()
   }
-    // console.log(userInfo,"kkkkkkkkkkkkk")
-  // @action async getUserInfo(): Promise<any> {
-  //   let userInfo: any = await getUserIn()
-  //   this.userInfo = userInfo.data
-  //   //console.log(userInfo,"kkkkkkkkkkkkk",userInfo.data)
-  //   this.userName = userInfo.data.user_name
-  //   this.identity_text = userInfo.data.identity_text
-  //   this.getViewAuthority()
-  //   //  //获取相应身份对应的权限页面
-  //   this.getIdentityViewAction()
-  // }
+  
 
   //获取用户权限
   @action async getViewAuthority(): Promise<any> {
@@ -87,6 +77,11 @@ class User {
     this.nowIndetityViews=arr
     console.log("aaaaaaaaaaaa",result)
     return result;
+  }
+
+  @action async getUserList(){
+        let result= await getUserList()
+        console.log(result)
   }
 }
 export default User;

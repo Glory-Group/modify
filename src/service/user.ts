@@ -35,3 +35,7 @@ export let updateUserInfo=(params:any)=>{
 export let getIdentityView=()=>{
   return request.get("/user/identity_view_authority_relation")
 }
+//获取用户列表
+export let getUserList=()=>{
+  return request.get("/user/user")
+}

@@ -31,9 +31,7 @@ let editQuestion = Loadable({ loading: Loading, loader: () => import("../views/m
 let routes = [
     {
         component: login,
-        path: "/login",
-        //view_id: "login"
-
+        path: "/login"
     },
     {
         children: [

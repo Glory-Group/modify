@@ -35,7 +35,7 @@ class App extends React.Component<propsInfo> {
   public render() {
     let myRoutes:any =[];
     if(this.props.user.nowIndetityViews.length){
-       myRoutes = filterView(routes, this.props.user.viewAuthority);
+       myRoutes = filterView(routes, this.props.user.nowIndetityViews);
       console.log(myRoutes)
     }
     

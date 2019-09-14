@@ -40,7 +40,9 @@ export function filterView(originRoutes: object[], viewAutority: object[]): obje
     function func(originRoutes: object[], viewAutority: object[]): object[] {
         let routes: object[]  = [];
         originRoutes.forEach(({ ...item }: any) => {
-         
+            if (item.children) {
+                item.children = func(item.children, viewAutority)
+            }
             if (item.view_id) {//筛选出对应身份可访问的页面
                 if (viewAutority.findIndex((value: any) => value.view_id === item.view_id) !== -1) {
                     routes.push(item)
@@ -50,9 +52,7 @@ export function filterView(originRoutes: object[], viewAutority: object[]): obje
                     forbiddenView.push({ from: item.path, to: "/403" });
                    console.log(forbiddenView)
                 }
-                if (item.children) {
-                    item.children = func(item.children, viewAutority)
-                }
+              
             } else {//公共页面
                 routes.push(item);
             }
