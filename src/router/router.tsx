@@ -11,7 +11,7 @@ interface PropsInfo{
 class RoutesView extends React.Component<PropsInfo> {
 
   public render() {
-         let {routes}=this.props
+        let {routes}=this.props
         return (
             <RouterView routes={routes}></RouterView>
         )

@@ -83,13 +83,13 @@ let routes = [
                     "id": 4,
                     component: addUser,
                     path: "/main/user/addUser",
-                    view_id: "main-addUser"
+                    // view_id: "main-addUser"
                 }, {
                     "title": "menu.user.showUser",
                     "id": 5,
                     component: showUser,
                     path: "/main/user/showUser",
-                    view_id: "main-showUser"
+                    // view_id: "main-showUser"
                 }],
                 component: user,
                 path: "/main/user"
@@ -106,16 +106,16 @@ let routes = [
                     "id": 6,
                     component: addText,
                     path: "/main/text/addText",
-                    view_id: "main-addExam"
+                    // view_id: "main-addExam"
                 }, {
                     "title": "menu.exam.examList",
                     "id": 7,
                     component: listText,
-                    view_id: "main-examList",
+                    // view_id: "main-examList",
                     path: "/main/text/listText"
                 }, {
                     component: createTextPaper,
-                    view_id: "main-examEdit",
+                    // view_id: "main-examEdit",
                     path: "/main/text/createTextPaper"
                 }],
 
@@ -127,20 +127,20 @@ let routes = [
                     "title": "menu.class.room",
                     "id": 9,
                     component: classRoom,
-                    view_id: "main-room",
+                    // view_id: "main-room",
                     path: "/main/className/classRoom"
                 },
                 {
                     "title": "menu.class.grade",
                     "id": 8,
                     component: classType,
-                    view_id: "main-grade",
+                    // view_id: "main-grade",
                     path: "/main/className/classType"
                 }, {
                     "title": "menu.class.student",
                     "id": 10,
                     component: student,
-                    view_id: "main-student",
+                    // view_id: "main-student",
                     path: "/main/className/student"
                 }],
                 component: className,
@@ -154,15 +154,15 @@ let routes = [
                     "id": 11,
                     component: watingClass,
                     path: "/main/marking/watingClass",
-                    view_id: "main-examPaperClassmate"
+                    // view_id: "main-examPaperClassmate"
                 }, {
                     component: classMate,
                     path: "/main/marking/classMate/:id",
-                    view_id: "main-examPaperClassList"
+                    // view_id: "main-examPaperClassList"
                 }],
                 component: marking,
                 path: "/main/marking",
-                view_id: "main-examinationPapers"
+                // view_id: "main-examinationPapers"
 
             }
         ],
