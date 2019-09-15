@@ -1,6 +1,9 @@
 import { observable, action } from 'mobx'
 
-import { getTabList, addList, addUserType, setUserType, getUserIn, getViewAuthority,updateUserInfo, getIdentityView ,getUserList} from "../../service/user"
+import service from '@/service/index'
+
+
+const { getTabList, addList, addUserType, setUserType, getUserIn, getViewAuthority,updateUserInfo, getIdentityView ,getUserList} = service
 class User {
 
   @observable userInfo: any = {};
@@ -75,13 +78,11 @@ class User {
       }
     })
     this.nowIndetityViews=arr
-    console.log("aaaaaaaaaaaa",result)
     return result;
   }
 
   @action async getUserList(){
         let result= await getUserList()
-        console.log(result)
   }
 }
 export default User;

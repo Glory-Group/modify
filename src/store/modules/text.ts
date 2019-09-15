@@ -1,6 +1,8 @@
 import { observable, action } from "mobx"
-import { createText,getExamList,createPaper} from "../../service/index"
 import {message} from "antd"
+import service from '@/service/index'
+const { createText,getExamList,createPaper} = service
+
 
 class Text {
     @observable questions:any=[]

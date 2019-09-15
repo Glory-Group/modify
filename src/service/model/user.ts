@@ -1,4 +1,4 @@
-import request from "../util/request"
+import request from "../../util/request"
 
 //展示身份数据
 

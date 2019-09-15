@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx'
-import { getQuestion, getSubject, examType, getQuestionType, getCondition, addType, addQuestions,updateQuestion } from '../../service/index'
-
+import service from '@/service/index'
+const { getQuestion, getSubject, examType, getQuestionType, getCondition, addType, addQuestions,updateQuestion } = service
 class Question {
     @observable dataList: object = {};
 

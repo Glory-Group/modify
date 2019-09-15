@@ -1,4 +1,4 @@
-import request from "../util/request"
+import request from "@/util/request"
 
 export let getClassList=(url:string)=>{
     return request.get(url)

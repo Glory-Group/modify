@@ -36,7 +36,7 @@ function beforeEach(history: any) {
 export function filterView(originRoutes: object[], viewAutority: object[]): object[] {
     //用来保存没有权限的页面
     const forbiddenView: object[] = [];
-  
+    
     function func(originRoutes: object[], viewAutority: object[]): object[] {
         let routes: object[]  = [];
         originRoutes.forEach(({ ...item }: any) => {
@@ -50,8 +50,9 @@ export function filterView(originRoutes: object[], viewAutority: object[]): obje
                 } else {//将此身份不能访问的页面跳转的403页面
                   
                     forbiddenView.push({ from: item.path, to: "/403" });
-                   console.log(forbiddenView)
+                  
                 }
+             
               
             } else {//公共页面
                 routes.push(item);
@@ -60,7 +61,7 @@ export function filterView(originRoutes: object[], viewAutority: object[]): obje
         return routes;
     }
     let route = func(originRoutes, viewAutority);
-  
+    console.log(route)
     return forbiddenView.concat(route)
 }
 export default guard;

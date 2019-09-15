@@ -37,7 +37,9 @@ class Siders extends React.Component<PropsInfo> {
     let { viewAuthority } = this.props.user;
     let {formatMessage} = this.props.intl;
     let myRoutes: any = filterView(routes, viewAuthority)
+
     myRoutes = myRoutes.find((item: any) => item.children).children
+  
     return <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{ height: "100%", position: "fixed", top: "64px" }}>
       <div className="logo">
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
@@ -52,6 +54,8 @@ class Siders extends React.Component<PropsInfo> {
               }
             >
               {item.children && item.children.map((sub: any) =>
+             
+
                 sub.title && <Menu.Item key={sub.id} >
                   <NavLink to={sub.path}>{sub.title?formatMessage({id:sub.title}):sub.path}</NavLink>
                 </Menu.Item>

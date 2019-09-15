@@ -1,5 +1,7 @@
 import { observable, action } from "mobx"
-import { getClassList, addClassList, getGradeList, getRoomList, getStudentInfo, delStudent, delGrade, delRoom,updateGrade } from "../../service/index"
+import service from '@/service/index'
+
+const  { getClassList, addClassList, getGradeList, getRoomList, getStudentInfo, delStudent, delGrade, delRoom,updateGrade } = service
 
 class ClassType {
     //获取班级号，教室号

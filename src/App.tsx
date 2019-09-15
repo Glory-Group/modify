@@ -43,7 +43,7 @@ class App extends React.Component<propsInfo> {
  //   console.log(this.props.user.nowIndetityViews,"lkaslkalkla")
     return (<IntlProvider locale={this.props.global.locale} messages={localeMap[this.props.global.locale]}>
       <Router history={history} >
-        <RoutesView routes={myRoutes} />
+        <RoutesView/>
       </Router>
     </IntlProvider>
     );

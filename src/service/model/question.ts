@@ -1,4 +1,4 @@
-import request from '../util/request';
+import request from '../../util/request';
 
 // 获取试题
 export let getQuestion = (params: object)=>{
