@@ -203,15 +203,15 @@ module.exports = {
           },
           {
             test: /\.s[ac]ss$/i,
-            loader: [
-              'style-loader',
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: true
+            use: [
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true
+                    },
                 },
-              },
-              'sass-loader'
+                'sass-loader',
             ],
         },
           // "file" loader makes sure those assets get served by WebpackDevServer.
