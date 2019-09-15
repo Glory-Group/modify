@@ -4,9 +4,9 @@ import {getToken} from "./saveToken";
 import {message} from 'antd';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:7001',
+    baseURL: 'http://169.254.192.12:7001',
     timeout: 1000,
-     headers: {'authorization': getToken()}
+    headers: {'authorization': getToken()}
 });
 
 // 请求拦截器
