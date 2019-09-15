@@ -1,7 +1,5 @@
 
 
-
-
 const cont = require['context']('./model', false, /\.ts$/);
 
 let arr: any = cont.keys().map((key: any) =>

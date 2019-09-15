@@ -10,10 +10,10 @@ function guard(history: any) {
 };
 function beforeEach(history: any) {
     if (getToken()) {
-        const userInfo: any = store.user.userInfo;
+        const userInfo: any = store['user'].userInfo;
         if (!Object.keys(userInfo).length) {
             //获取身份信息 根据身份信息 分发页面权限
-            store.user.getUserInfo()        
+            store['user'].getUserInfo()        
         }
     } else {
         //跳转到登录页面
@@ -61,7 +61,6 @@ export function filterView(originRoutes: object[], viewAutority: object[]): obje
         return routes;
     }
     let route = func(originRoutes, viewAutority);
-    console.log(route)
     return forbiddenView.concat(route)
 }
 export default guard;

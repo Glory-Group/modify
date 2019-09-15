@@ -36,14 +36,14 @@ class Siders extends React.Component<PropsInfo> {
     //用户权限
     let { viewAuthority } = this.props.user;
     let {formatMessage} = this.props.intl;
-    let myRoutes: any = filterView(routes, viewAuthority)
+    // let myRoutes: any = filterView(routes, viewAuthority)
 
-    myRoutes = myRoutes.find((item: any) => item.children).children
-  
+    // myRoutes = myRoutes.find((item: any) => item.children).children
+  let  {children}=routes[1]
     return <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{ height: "100%", position: "fixed", top: "64px" }}>
       <div className="logo">
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          {myRoutes.map((item: any, index: number) =>
+          {children&&children.map((item: any, index: number) =>
             item.title && <SubMenu
               key={item.title}
               title={

@@ -36,7 +36,6 @@ class App extends React.Component<propsInfo> {
     let myRoutes:any =[];
     if(this.props.user.nowIndetityViews.length){
        myRoutes = filterView(routes, this.props.user.nowIndetityViews);
-      console.log(myRoutes)
     }
     
     // let nowIndetityViews=this.props.user.nowIndetityViews.length&&this.props.user.nowIndetityViews

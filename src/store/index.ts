@@ -1,25 +1,13 @@
-// 引入子模块
-import Login from './modules/login';
-import Question from "./modules/question";
-import User from "./modules/user";
-import ClassType from "./modules/class";
-import Text from "./modules/text"
-import Mark from './modules/mark';
-import Global from "./modules/global"
-// 实例化模块
-const login = new Login();
-const question=new Question();
-const user=new User();
-const classType=new ClassType();
-const text =new Text()
-const mark=new Mark()
-const global=new Global()
-export default {
-    login,
-    question,
-    user,
-    classType,
-    text,
-    mark,
-    global
-}
+
+
+
+// 集群导入  xxx.ts 文件   直接使用文件名的方式去注入   @inject('xxx')
+const context = require['context']('./modules', false, /\.ts$/);
+
+let obj = {}
+context.keys().forEach((key: any) => {
+  obj[key.slice(2).slice(0, -3)] = new (context(key).default)
+});
+
+
+export default obj
