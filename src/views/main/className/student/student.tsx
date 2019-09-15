@@ -5,6 +5,7 @@ import "./scss/listText.css"
 import XLSX from 'xlsx'
 
 const { Column, ColumnGroup } = Table;
+
 interface propsInfo {
     form: any,
     question: any,
