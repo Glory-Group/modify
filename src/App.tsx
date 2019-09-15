@@ -44,7 +44,7 @@ class App extends React.Component<propsInfo> {
     return (
      <IntlProvider locale={this.props.global.locale} messages={localeMap[this.props.global.locale]}>
       <Router history={history} >
-        <RoutesView routes={myRoutes} />
+        <RoutesView/>
       </Router>
      </IntlProvider>
     );

@@ -169,18 +169,17 @@ let routes = [
         component: main,
         path: "/main",
         view_id: "main"
-    }, {
-        path: "/403",
-        component: () => <div>403</div>
-    }, {
-        path: "/404",
-        component: () => <div>404</div>
-    }, {
+    },
+    // }, {
+    //     path: "/403",
+    //     component: () => <div>403</div>
+    // }, {
+    //     path: "/404",
+    //     component: () => <div>404</div>
+    // },
+    {
         from: "/",
         to: "/login"
-    }, {
-        from: "*",
-        to: "/404"
     }
 ]
 export default routes

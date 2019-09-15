@@ -87,6 +87,7 @@ export class Head extends React.Component<propsInfo> {
         let result = await this.props.user.updateUserInfoAction({user_id,user_name,user_pwd,identity_id,avatar})
        if(result.code===1){
         message.success(result.msg)
+        this.handleCancel()
        }
        
       }
@@ -113,7 +114,7 @@ export class Head extends React.Component<propsInfo> {
   public render() {
     const { langList, menu, visible, confirmLoading, identity_id, user_id, user_name } = this.state
     const { getFieldDecorator } = this.props.form;
-    const {avatar}=this.props.user
+    const {avatar,userInfo}=this.props.user
     const uploadButton = (
       <div>
         <div className="ant-upload-text">Upload</div>
@@ -134,7 +135,7 @@ export class Head extends React.Component<propsInfo> {
         </div>
         <div className="header-msg" >
           <Dropdown overlay={menu} placement="bottomCenter"  >
-            <span>   <Avatar size="large" src={avatar} style={{ marginRight: "5px" }} />  {user_name}</span>
+            <span>   <Avatar size="large" src={userInfo.avatar} style={{ marginRight: "5px" }} />  {user_name}</span>
           </Dropdown>
         </div>
         <Modal
