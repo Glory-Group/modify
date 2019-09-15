@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Form, Input, Cascader, Button, Table, message } from 'antd';
 import { observer, inject } from "mobx-react";
 import "./scss/listText.css"
+import XLSX from 'xlsx'
+
 const { Column, ColumnGroup } = Table;
 interface propsInfo {
     form: any,
@@ -75,24 +77,17 @@ export class Student extends React.Component<propsInfo> {
                 let { studentList, room_id, grade_id } = this.state
                 let { student_name } = values
                 let newArr = studentList.filter((item: any) => {
-                    if (student_name && room_id && grade_id) {
-                        return item.student_name === student_name && item.room_id === room_id && item.grade_id === grade_id
-                    } else if (student_name && room_id && !grade_id) {
-                        return item.student_name === student_name && item.room_id === room_id
-                    } else if (student_name && !room_id && grade_id) {
-                        return item.student_name === student_name && item.grade_id === grade_id
-                    } else if (!student_name && room_id && grade_id) {
-                        return item.room_id === room_id && item.grade_id === grade_id
-                    } else if (student_name && !room_id && !grade_id) {
-                        return item.student_name === student_name
-                    } else if (!student_name && room_id && !grade_id) {
-                        return item.room_id === room_id
-                    } else if (!student_name && !room_id && grade_id) {
-                        return item.grade_id === grade_id
-                    } else if (!student_name && !room_id && grade_id) {
-                        this.getStudentInfo()
+                    let flag = true;
+                    if (student_name){
+                        flag = flag && student_name === item.student_name;
                     }
-                    return []
+                    if (grade_id){
+                        flag = flag && grade_id === item.grade_id;
+                    }
+                    if (room_id){
+                        flag = flag && room_id === item.rorm_id;
+                    }
+                    return flag;
                 })
                 this.setState({
                     newList: newArr
@@ -177,6 +172,39 @@ export class Student extends React.Component<propsInfo> {
 
         })
     }
+
+    exportExcel = ()=>{
+        // 1.把table里面的数据生成worksheet
+        let wroksheet = XLSX.utils.json_to_sheet(this.state.newList);
+
+        // 2.把worksheet放到workbook里
+        let workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, wroksheet);
+        XLSX.utils.book_append_sheet(workbook, wroksheet);
+        XLSX.utils.book_append_sheet(workbook, wroksheet);
+        XLSX.utils.book_append_sheet(workbook, wroksheet);
+        XLSX.utils.book_append_sheet(workbook, wroksheet);
+
+
+
+        XLSX.writeFile(workbook, '学生名单.xlsx');
+    }
+
+    uploadExcel = (e:any)=>{
+        console.log('e...', e.target, e.target.files);
+        let reader = new FileReader();
+        reader.onload = function(e: any){
+            var data = new Uint8Array(e.target.result);
+            var workbook = XLSX.read(data, {type: 'array'});
+            console.log('workbook...', workbook);
+
+            var ws = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+            console.log('data...', ws);
+        }
+
+        reader.readAsArrayBuffer(e.target.files[0]);
+    }
+
     public render() {
         const { getFieldDecorator } = this.props.form;
 
@@ -207,6 +235,12 @@ export class Student extends React.Component<propsInfo> {
                             </Button>
                             <Button type="primary" onClick={this.reset} style={{marginLeft:"10px"}}>
                                 重置
+                            </Button>
+                            <Button type="primary" onClick={this.exportExcel} style={{marginLeft:"10px"}}>
+                                导出学生名单
+                            </Button>
+                            <Button type="primary"  style={{marginLeft:"10px"}}>
+                                <input type="file" accept=".xlsx" onChange={this.uploadExcel}/>
                             </Button>
                         </Form.Item>
 
