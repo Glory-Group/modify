@@ -1,4 +1,4 @@
-.header {
+:global .header {
   padding: 0;
   background: #fff;
   line-height: 64px;
@@ -10,13 +10,13 @@
   display: flex;
 }
 
-.header .header-msg {
+:global .header .header-msg {
   position: absolute;
   right: 100px;
   border: 1px solid #fff;
 }
 
-.header .header-msg .ant-dropdown-trigger {
+:global .header .header-msg .ant-dropdown-trigger {
   height: 64px;
   display: flex;
   width: 150px;
@@ -24,13 +24,13 @@
   align-items: center;
 }
 
-.lang-select {
+:global .lang-select {
   position: absolute;
   right: 400px;
   top: 20px;
 }
 
-.person-info {
+:global .person-info {
   position: absolute;
   right: 150px;
   top: 9px;
@@ -38,7 +38,7 @@
   line-height: 64px;
 }
 
-.person-avator {
+:global .person-avator {
   display: inline-block;
   width: 36px;
   height: 36px;
@@ -46,7 +46,7 @@
   border-radius: 50%;
 }
 
-.avatar {
+:global .avatar {
   display: inline-block;
   width: 36px;
   height: 36px;
