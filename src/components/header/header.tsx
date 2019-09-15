@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Layout, Select, Menu, Dropdown, Avatar, Modal, message, Input, Form, Icon, Upload } from 'antd';
 import { inject, observer } from 'mobx-react'
-import "./scss/header.css"
+ import  "./scss/header.scss"
+//import styles from "./scss/header.scss"
+
 const { Option } = Select;
 const { Header } = Layout;
 interface propsInfo {
@@ -134,7 +136,7 @@ export class Head extends React.Component<propsInfo> {
 
           </Select>
         </div>
-        <div className="header-msg" >
+        <div className="header-msg">
           <Dropdown overlay={menu} placement="bottomCenter"  >
             <span>   <Avatar size="large" src={userInfo.avatar} style={{ marginRight: "5px" }} />  {user_name}</span>
           </Dropdown>
