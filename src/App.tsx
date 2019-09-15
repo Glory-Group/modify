@@ -1,7 +1,7 @@
 import * as React from 'react';
 //引入配置路由
 import RoutesView from "./router/router"
-import { createBrowserHistory } from "history"
+import { createHashHistory } from "history"
 import { Router } from "react-router"
 import routes from "./router/routerSetting"
 import { inject, observer } from 'mobx-react'
@@ -18,7 +18,7 @@ const localeMap = {
   zh: zhCN
 }
 //创建一个browser router
-const history = createBrowserHistory()
+const history = createHashHistory()
 guardInit(history)
 interface propsInfo {
   user?: any,
