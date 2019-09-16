@@ -2,12 +2,17 @@ import axios from 'axios';
 import {AxiosResponse} from 'axios/index';
 import {getToken} from "./saveToken";
 import {message} from 'antd';
+const Url={
+  '123.206.55.50':"//exam.jasonandjay.com",
+  '127.0.0.1':'//169.254.19.211:7001'
+}
 
 const instance = axios.create({
-    baseURL: 'http://169.254.192.12:7001',
+    baseURL: Url[window.location.host],
     timeout: 1000,
     headers: {'authorization': getToken()}
 });
+
 
 // 请求拦截器
 instance.interceptors.request.use( (config) =>{
