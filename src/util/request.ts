@@ -5,7 +5,8 @@ import {message} from 'antd';
 
 const Url={
   '123.206.55.50':"//exam.jasonandjay.com",
-  '127.0.0.1':'//169.254.192.12:7001'
+  'jasonandjay.com':'//exam.jasonandjay.com',
+  '127.0.0.1:3000':'//169.254.192.12:7001'
 }
 
 const instance = axios.create({

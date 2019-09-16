@@ -6,7 +6,7 @@ import { Router } from "react-router"
 import routes from "./router/routerSetting"
 import { inject, observer } from 'mobx-react'
 //引入andt样式
-import 'antd/dist/antd.css';
+ import 'antd/dist/antd.css';
 //引入导航守卫
 import guardInit, { filterView } from "./util/permission"
 // 引入国际化
