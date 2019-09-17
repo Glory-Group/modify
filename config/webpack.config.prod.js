@@ -17,7 +17,11 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
+<<<<<<< HEAD
 const publicPath = "./";
+=======
+const publicPath = './';
+>>>>>>> 1289e63f02c99e7cd0d874465b53fa0c785227c9
 // Some apps do not use client-side routing with pushState.
 // For these, "homepage" can be set to "." to enable relative asset paths.
 const shouldUseRelativeAssetPaths = publicPath === './';
@@ -266,6 +270,11 @@ module.exports = {
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
     new InterpolateHtmlPlugin(env.raw),
+<<<<<<< HEAD
+=======
+    // 包的分离，分离出非业务逻辑相关的包
+    //将node_modules单独管理
+>>>>>>> 1289e63f02c99e7cd0d874465b53fa0c785227c9
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module) {
