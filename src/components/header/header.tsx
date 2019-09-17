@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Layout, Select, Menu, Dropdown, Avatar, Modal, message, Input, Form, Icon, Upload } from 'antd';
 import { inject, observer } from 'mobx-react'
- import  "./scss/header.scss"
+ import  "./scss/header.css"
 //import styles from "./scss/header.scss"
 
 const { Option } = Select;
